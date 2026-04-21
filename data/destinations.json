@@ -1,0 +1,936 @@
+[
+  {
+    "name": "서울 종로·북촌",
+    "tag": "궁궐 + 한옥마을",
+    "emoji": "🏯",
+    "reason": "경복궁, 창덕궁, 북촌 한옥마을이 도보권에 모여 있어요. 현대 도시 한복판에서 조선의 골목을 걷는 묘한 감각이 서울만의 매력이에요.",
+    "x": 37,
+    "y": 22,
+    "images": []
+  },
+  {
+    "name": "서울 홍대·연남동",
+    "tag": "카페 + 인디문화",
+    "emoji": "🎨",
+    "reason": "개성 넘치는 독립 카페와 갤러리, 라이브 클럽이 밀집한 서울의 힙스터 성지예요. 연남동 경의선 숲길을 따라 걷다 보면 자연스럽게 하루가 채워져요.",
+    "x": 35,
+    "y": 23,
+    "images": []
+  },
+  {
+    "name": "서울 성수동",
+    "tag": "감성 + 팝업",
+    "emoji": "🏭",
+    "reason": "낡은 공장과 세련된 카페가 공존하는 서울에서 가장 트렌디한 동네예요. 매주 새로운 팝업 스토어가 열려서 올 때마다 다른 경험을 할 수 있어요.",
+    "x": 39,
+    "y": 23,
+    "images": []
+  },
+  {
+    "name": "서울 을지로",
+    "tag": "레트로 + 힙한 술집",
+    "emoji": "🍺",
+    "reason": "낡은 인쇄소와 철물점 골목 사이에 숨어있는 힙한 바와 식당들. 오래된 것과 새로운 것이 뒤섞인 을지로만의 오묘한 분위기에 빠져들게 돼요.",
+    "x": 37,
+    "y": 24,
+    "images": []
+  },
+  {
+    "name": "서울 한강공원",
+    "tag": "피크닉 + 야경",
+    "emoji": "🌉",
+    "reason": "치맥과 함께하는 한강 노을은 서울 여행의 필수 코스예요. 자전거를 빌려 달리거나 돗자리 하나 펴고 멍하니 강을 바라보는 것만으로 충분해요.",
+    "x": 36,
+    "y": 25,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/59/1305559.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/60/1305560.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/69/1305569.jpg"
+    ]
+  },
+  {
+    "name": "수원 화성",
+    "tag": "역사 + 야경",
+    "emoji": "🏰",
+    "reason": "조선 정조가 쌓은 유네스코 세계문화유산. 성벽을 따라 걷는 트레킹 코스가 잘 정비되어 있고, 야간 조명이 켜지면 전혀 다른 분위기로 변해요.",
+    "x": 34,
+    "y": 30,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/55/1226855.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/56/1226856.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/63/1226863.jpg"
+    ]
+  },
+  {
+    "name": "가평 남이섬",
+    "tag": "자연 + 낭만",
+    "emoji": "🍁",
+    "reason": "드라마 겨울연가로 유명해진 메타세쿼이아 길이 사계절 내내 아름다워요. 배를 타고 들어가는 섬이라는 설렘이 여행의 시작부터 특별하게 만들어줘요.",
+    "x": 48,
+    "y": 20,
+    "images": []
+  },
+  {
+    "name": "가평 자라섬",
+    "tag": "캠핑 + 재즈",
+    "emoji": "🎷",
+    "reason": "매년 가을 열리는 자라섬 재즈 페스티벌로 유명해요. 북한강이 내려다보이는 캠핑장에서 보내는 하룻밤은 도시 생활의 피로를 한 번에 씻어줘요.",
+    "x": 49,
+    "y": 19,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/43/2863743.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/61/2863761.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/74/2863774.jpg"
+    ]
+  },
+  {
+    "name": "양평",
+    "tag": "강변 + 전원카페",
+    "emoji": "☕",
+    "reason": "두물머리의 새벽 안개와 강변을 따라 늘어선 개성 있는 카페들이 유명해요. 서울에서 한 시간 거리지만 완전히 다른 세계에 온 것 같은 여유가 있어요.",
+    "x": 46,
+    "y": 24,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/81/1093681.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/33/1106333.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/36/1106336.jpg"
+    ]
+  },
+  {
+    "name": "파주 헤이리",
+    "tag": "예술마을 + 카페",
+    "emoji": "🖼️",
+    "reason": "예술가들이 모여 만든 마을로, 독특한 건축물과 갤러리, 카페가 가득해요. 딱히 목적 없이 걷기만 해도 곳곳에서 예술적 영감이 넘쳐흘러요.",
+    "x": 32,
+    "y": 19,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/31/2593731.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/32/2593732.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/33/2593733.jpg"
+    ]
+  },
+  {
+    "name": "강화도",
+    "tag": "역사 + 갯벌",
+    "emoji": "🦀",
+    "reason": "고인돌부터 고려 궁지, 광성보까지 선사시대부터 근대까지의 역사가 한 섬에 모여 있어요. 갯벌에서 잡은 신선한 해산물도 빠질 수 없는 즐거움이에요.",
+    "x": 28,
+    "y": 27,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/59/1835259.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/60/1835260.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/62/1835262.jpg"
+    ]
+  },
+  {
+    "name": "인천 차이나타운",
+    "tag": "짜장면 + 이국감성",
+    "emoji": "🥢",
+    "reason": "우리나라 짜장면의 발상지이자 개항 역사가 살아 숨쉬는 곳이에요. 알록달록한 패루와 중국식 건물들이 늘어선 거리가 묘하게 이국적인 감성을 풍겨요.",
+    "x": 29,
+    "y": 28,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/18/1451518.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/45/1451645.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/78/1451678.jpg"
+    ]
+  },
+  {
+    "name": "인천 을왕리",
+    "tag": "바다 + 낙조",
+    "emoji": "🌅",
+    "reason": "서해 최고의 일몰 명소 중 하나예요. 인천공항 근처라 접근성도 좋고, 조개구이와 함께 바라보는 붉은 노을은 잊기 힘든 장면이 돼요.",
+    "x": 27,
+    "y": 29,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/13/2563913.jpg"
+    ]
+  },
+  {
+    "name": "용인 에버랜드",
+    "tag": "테마파크",
+    "emoji": "🎡",
+    "reason": "국내 최대 테마파크로 놀이기구부터 동물원, 시즌별 꽃 축제까지 볼거리가 넘쳐요. 어른도 아이처럼 즐거워지는 하루를 보장해요.",
+    "x": 37,
+    "y": 32,
+    "images": []
+  },
+  {
+    "name": "춘천",
+    "tag": "닭갈비 + 낭만",
+    "emoji": "🍗",
+    "reason": "명동 닭갈비 골목의 매콤한 닭갈비는 춘천에 와야 할 이유로 충분해요. 의암호 주변 자전거 길과 남이섬으로 이어지는 코스도 낭만적이에요.",
+    "x": 50,
+    "y": 20,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/47/1219847.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/49/1219849.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/50/1219850.jpg"
+    ]
+  },
+  {
+    "name": "강릉",
+    "tag": "바다 + 커피",
+    "emoji": "☕",
+    "reason": "국내 커피 문화의 성지이자 동해 최고의 해변 도시예요. 안목해변 커피거리에서 테이크아웃 커피 한 잔 들고 파도 소리 들으며 산책하는 것만으로도 완벽해요.",
+    "x": 64,
+    "y": 27,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/20/1090320.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/75/1127675.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/77/1127677.jpg"
+    ]
+  },
+  {
+    "name": "속초",
+    "tag": "설악산 + 바다",
+    "emoji": "🏔️",
+    "reason": "설악산 단풍과 동해 바다를 동시에 즐길 수 있는 유일한 도시예요. 아바이순대와 오징어순대 한 접시면 여행의 마무리도 완벽해요.",
+    "x": 65,
+    "y": 18,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/07/1691207.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/09/1691209.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/14/1691214.jpg"
+    ]
+  },
+  {
+    "name": "양양",
+    "tag": "서핑 + 낙산사",
+    "emoji": "🏄",
+    "reason": "국내 서핑의 성지 죽도해변과 천년 고찰 낙산사가 공존하는 독특한 도시예요. 파도 위에서의 짜릿함과 의상대 일출의 고요함을 하루에 모두 경험할 수 있어요.",
+    "x": 65,
+    "y": 22,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/52/1187852.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/00/1187900.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/14/1187914.jpg"
+    ]
+  },
+  {
+    "name": "평창",
+    "tag": "자연 + 스키",
+    "emoji": "⛷️",
+    "reason": "겨울엔 스키 천국, 여름엔 서늘한 고원 여행지로 변신해요. 이효석의 메밀꽃 필 무렵 배경인 봉평 메밀밭은 가을이면 하얀 꽃의 물결로 넘실거려요.",
+    "x": 57,
+    "y": 27,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/16/1202316.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/07/1599107.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/75/1683875.jpg"
+    ]
+  },
+  {
+    "name": "정선",
+    "tag": "레일바이크 + 절경",
+    "emoji": "🚵",
+    "reason": "폐광 철로를 활용한 레일바이크가 유명하고, 한반도 지형을 닮은 동강 뷰가 압도적이에요. 카지노부터 자연 절경까지 독특한 매력의 여행지예요.",
+    "x": 60,
+    "y": 30,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/69/1058669.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/82/1058682.jpg"
+    ]
+  },
+  {
+    "name": "태백",
+    "tag": "고원 + 눈꽃",
+    "emoji": "⛏️",
+    "reason": "해발 700m 고원 도시로 겨울이면 환상적인 눈꽃 세상이 펼쳐져요. 석탄 역사를 담은 태백석탄박물관과 검룡소 등 독특한 볼거리가 가득해요.",
+    "x": 62,
+    "y": 33,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/12/1083512.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/18/1083518.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/99/1090499.jpg"
+    ]
+  },
+  {
+    "name": "영월",
+    "tag": "동강 + 별마로천문대",
+    "emoji": "🔭",
+    "reason": "국내 최고의 별 관측지로 꼽히는 별마로천문대가 있어요. 단종의 한이 서린 청령포와 동강의 래프팅까지 이야기와 자연이 풍성한 곳이에요.",
+    "x": 58,
+    "y": 32,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/41/1013841.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/42/1013842.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/27/1105627.jpg"
+    ]
+  },
+  {
+    "name": "인제 원대리 자작나무숲",
+    "tag": "자작나무 + 힐링",
+    "emoji": "🌲",
+    "reason": "새하얀 자작나무 숲길을 걷는 것만으로 마음이 정화되는 기분이에요. 특히 눈 내린 겨울이나 신록의 봄에 방문하면 그 아름다움이 배가돼요.",
+    "x": 59,
+    "y": 18,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/59/1840359.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/67/1840367.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/69/1840369.jpg"
+    ]
+  },
+  {
+    "name": "고성 화진포",
+    "tag": "석호 + 해변",
+    "emoji": "🏖️",
+    "reason": "국내 최대 석호인 화진포와 맑은 동해 해변이 만나는 곳이에요. 이승만, 김일성, 이기붕의 별장이 남아 있는 독특한 역사적 배경도 흥미로워요.",
+    "x": 66,
+    "y": 14,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/74/2454774.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/81/2454781.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/89/2454789.jpg"
+    ]
+  },
+  {
+    "name": "삼척 해신당공원",
+    "tag": "해안 + 이색명소",
+    "emoji": "🗿",
+    "reason": "어촌 설화에서 비롯된 독특한 테마 공원이에요. 기암괴석의 해안 절경과 함께 한국에서 가장 독특한 야외 박물관 경험을 할 수 있어요.",
+    "x": 66,
+    "y": 35,
+    "images": []
+  },
+  {
+    "name": "단양",
+    "tag": "도담삼봉 + 마늘",
+    "emoji": "🧄",
+    "reason": "남한강 위에 솟아오른 도담삼봉은 한국 10경 중 하나예요. 마늘 요리와 올갱이국 같은 향토 음식, 고수동굴 등 볼거리 먹거리가 알차게 모여 있어요.",
+    "x": 54,
+    "y": 36,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/03/1142603.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/10/1142610.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/92/1414792.jpg"
+    ]
+  },
+  {
+    "name": "제천 청풍호",
+    "tag": "호수 + 드라이브",
+    "emoji": "🚗",
+    "reason": "충주댐으로 만들어진 청풍호는 사방이 산으로 둘러싸인 비경을 자랑해요. 호수 위를 달리는 드라이브 코스와 청풍문화재단지가 볼만해요.",
+    "x": 54,
+    "y": 33,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/81/1833781.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/04/1833804.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/10/2006210.jpg"
+    ]
+  },
+  {
+    "name": "충주 탄금호",
+    "tag": "자전거 + 호수",
+    "emoji": "🚴",
+    "reason": "탄금호 자전거 길은 국내 최고의 라이딩 코스 중 하나로 손꼽혀요. 물 위에 떠 있는 것 같은 수변 공원과 우륵박물관도 함께 즐길 수 있어요.",
+    "x": 50,
+    "y": 34,
+    "images": []
+  },
+  {
+    "name": "공주 무령왕릉",
+    "tag": "백제 + 역사",
+    "emoji": "🏛️",
+    "reason": "백제 무령왕의 무덤으로 도굴되지 않고 온전히 발굴된 기적의 현장이에요. 국립공주박물관에서 화려한 백제 금관 장신구를 직접 눈으로 볼 수 있어요.",
+    "x": 42,
+    "y": 43,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/39/1137939.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/40/1137940.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/23/1138023.jpg"
+    ]
+  },
+  {
+    "name": "부여",
+    "tag": "백제문화 + 연꽃",
+    "emoji": "🌸",
+    "reason": "백제의 마지막 수도로 낙화암의 비극적인 전설이 깃든 곳이에요. 궁남지의 연꽃이 만발하는 여름이면 이 조용한 도시가 가장 아름다워져요.",
+    "x": 43,
+    "y": 47,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/43/1137343.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/43/1137643.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/49/1137649.jpg"
+    ]
+  },
+  {
+    "name": "태안 해변",
+    "tag": "해수욕 + 꽃지",
+    "emoji": "🌻",
+    "reason": "꽃지해수욕장의 할미바위 낙조는 서해 최고의 일몰 사진 명소예요. 100리 해변 길을 따라 안면도 꽃박람회까지 꽃과 바다가 함께하는 여행이에요.",
+    "x": 30,
+    "y": 43,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/22/1073422.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/79/1073779.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/83/1073783.jpg"
+    ]
+  },
+  {
+    "name": "서산 해미읍성",
+    "tag": "역사 + 성곽",
+    "emoji": "🏯",
+    "reason": "조선시대 성곽이 원형에 가깝게 보존된 희귀한 유적이에요. 천주교 순교 역사의 현장이기도 하며, 성 안에 아직도 마을이 살아있는 특이한 구조예요.",
+    "x": 31,
+    "y": 42,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/61/1310961.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/63/1310963.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/66/1310966.jpg"
+    ]
+  },
+  {
+    "name": "보령 머드축제",
+    "tag": "갯벌 + 해변",
+    "emoji": "🌊",
+    "reason": "세계적으로 유명한 머드 축제와 대천해수욕장이 있어요. 황토 갯벌 머드팩은 피부에도 좋고, 여름 물놀이 여행지로 이만한 곳이 없어요.",
+    "x": 33,
+    "y": 50,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/17/1946717.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/21/1946721.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/23/1946723.jpg"
+    ]
+  },
+  {
+    "name": "아산 온양온천",
+    "tag": "온천 + 힐링",
+    "emoji": "♨️",
+    "reason": "조선 왕실이 즐겨 찾던 유서 깊은 온천이에요. 현충사와 외암 민속마을까지 역사 탐방과 온천 힐링을 하루에 모두 즐길 수 있어요.",
+    "x": 37,
+    "y": 40,
+    "images": []
+  },
+  {
+    "name": "전주 한옥마을",
+    "tag": "한옥 + 비빔밥",
+    "emoji": "🍱",
+    "reason": "700채가 넘는 한옥이 살아있는 마을에서 한복 입고 거닐며 먹는 전주비빔밥과 콩나물국밥은 최고의 조합이에요. 한국 전통 문화의 정수를 느낄 수 있어요.",
+    "x": 42,
+    "y": 62,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/49/1020749.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/52/1020752.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/55/1020755.jpg"
+    ]
+  },
+  {
+    "name": "군산",
+    "tag": "근대역사 + 빵",
+    "emoji": "🍞",
+    "reason": "일제강점기 수탈의 역사가 고스란히 남아있는 근대 건축물 거리가 인상적이에요. 이성당의 단팥빵과 야채빵은 전국에서 줄 서는 필수 먹거리예요.",
+    "x": 36,
+    "y": 59,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/32/1674132.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/35/1674135.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/44/1674144.jpg"
+    ]
+  },
+  {
+    "name": "남원 광한루",
+    "tag": "춘향전 + 한옥",
+    "emoji": "🎭",
+    "reason": "춘향전의 배경이 된 광한루원은 한국에서 가장 아름다운 정원 중 하나예요. 오작교 위를 걷다 보면 조선 시대 로맨스 속으로 들어온 기분이 들어요.",
+    "x": 48,
+    "y": 68,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/82/1961582.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/30/1961930.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/75/2563775.jpg"
+    ]
+  },
+  {
+    "name": "무주 덕유산",
+    "tag": "스키 + 반딧불",
+    "emoji": "✨",
+    "reason": "겨울엔 국내 최고 수준의 스키 리조트, 여름엔 반딧불 축제로 유명해요. 곤돌라를 타고 올라가는 설천봉 정상 뷰는 사계절 내내 압도적이에요.",
+    "x": 52,
+    "y": 62,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/47/1782747.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/49/1782749.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/50/1782750.jpg"
+    ]
+  },
+  {
+    "name": "진안 마이산",
+    "tag": "기암 + 탑사",
+    "emoji": "⛰️",
+    "reason": "말의 귀를 닮은 독특한 두 봉우리가 하늘을 찌르는 신비로운 산이에요. 돌을 쌓아 만든 80여 개의 돌탑이 즐비한 탑사는 경이로운 장관이에요.",
+    "x": 49,
+    "y": 63,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/80/1992980.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/84/1992984.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/86/1992986.jpg"
+    ]
+  },
+  {
+    "name": "부안 변산반도",
+    "tag": "해변 + 채석강",
+    "emoji": "🪨",
+    "reason": "수천만 권의 책을 쌓아놓은 듯한 채석강 절벽은 자연이 만든 예술 작품이에요. 격포 해수욕장과 내소사 전나무 숲까지 다채로운 볼거리가 있어요.",
+    "x": 35,
+    "y": 63,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/15/1129515.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/71/2907771.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/83/2944183.jpg"
+    ]
+  },
+  {
+    "name": "여수",
+    "tag": "야경 + 해산물",
+    "emoji": "🦐",
+    "reason": "여수 밤바다는 노래 가사처럼 정말 특별해요. 돌산도와 오동도를 잇는 케이블카 위에서 내려다보는 야경과 갓 잡은 해산물은 여수만의 특권이에요.",
+    "x": 50,
+    "y": 80,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/34/1030734.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/73/1030773.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/75/1030775.jpg"
+    ]
+  },
+  {
+    "name": "순천 낙안읍성",
+    "tag": "민속마을 + 갈대",
+    "emoji": "🌾",
+    "reason": "아직도 사람들이 살고 있는 조선시대 읍성이에요. 가을 순천만 갈대밭의 장관은 국내 최고의 사진 명소 중 하나로 손꼽혀요.",
+    "x": 51,
+    "y": 78,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/42/1031942.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/52/1031952.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/62/1031962.jpg"
+    ]
+  },
+  {
+    "name": "담양 죽녹원",
+    "tag": "대나무 + 메타세쿼이아",
+    "emoji": "🎋",
+    "reason": "청량한 대나무 숲길과 메타세쿼이아 가로수길이 사계절 푸르름을 자랑해요. 대통밥과 떡갈비 같은 담양 향토 음식도 꼭 먹어봐야 해요.",
+    "x": 45,
+    "y": 72,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/41/2010841.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/42/2010842.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/43/2010843.jpg"
+    ]
+  },
+  {
+    "name": "목포",
+    "tag": "항구 + 낙지",
+    "emoji": "🐙",
+    "reason": "일제강점기 수탈 항구의 역사를 품은 근대 건축물과 세발낙지, 민어 등 남도 해산물의 본고장이에요. 유달산에서 바라보는 다도해 뷰가 일품이에요.",
+    "x": 35,
+    "y": 79,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/64/1113964.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/70/1113970.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/71/1113971.jpg"
+    ]
+  },
+  {
+    "name": "보성 녹차밭",
+    "tag": "녹차 + 힐링",
+    "emoji": "🍵",
+    "reason": "초록색 융단을 펼쳐놓은 듯한 대한다원 녹차밭은 국내 최고의 포토스팟이에요. 안개 낀 아침이나 빗속의 녹차밭은 특히 몽환적인 아름다움을 자랑해요.",
+    "x": 49,
+    "y": 77,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/75/1029675.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/99/1029699.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/08/1029708.jpg"
+    ]
+  },
+  {
+    "name": "해남 땅끝마을",
+    "tag": "최남단 + 일몰",
+    "emoji": "🌄",
+    "reason": "한반도 최남단이라는 상징성만으로도 충분히 가볼 이유가 있어요. 땅끝 전망대에서 바라보는 다도해 일몰은 여행의 끝을 장식하는 황홀한 장면이에요.",
+    "x": 40,
+    "y": 85,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/13/1827713.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/15/1827715.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/17/1827717.jpg"
+    ]
+  },
+  {
+    "name": "강진 다산초당",
+    "tag": "다산 + 청자",
+    "emoji": "🏺",
+    "reason": "정약용이 유배 중 목민심서를 집필한 다산초당이 있어요. 고려청자의 본고장으로 청자박물관에서 천년의 도예 문화를 만날 수 있어요.",
+    "x": 44,
+    "y": 82,
+    "images": []
+  },
+  {
+    "name": "곡성 기차마을",
+    "tag": "증기기차 + 장미",
+    "emoji": "🌹",
+    "reason": "폐역을 활용한 증기기관차가 섬진강변을 달려요. 5월 장미 축제 시즌에 방문하면 만발한 장미와 기차의 낭만적인 조합이 잊지 못할 추억을 만들어줘요.",
+    "x": 48,
+    "y": 73,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/16/1936216.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/17/1936217.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/19/1936219.jpg"
+    ]
+  },
+  {
+    "name": "구례 화엄사",
+    "tag": "지리산 + 사찰",
+    "emoji": "🛕",
+    "reason": "지리산 자락의 천년 고찰 화엄사는 봄 홍매화와 가을 단풍 명소로 유명해요. 각황전 앞 마당에 서면 산사의 고요함이 온몸으로 전해져요.",
+    "x": 51,
+    "y": 73,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/51/1039851.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/53/1039853.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/54/1039854.jpg"
+    ]
+  },
+  {
+    "name": "신안 퍼플섬",
+    "tag": "보라색 섬 + 포토존",
+    "emoji": "💜",
+    "reason": "집도 다리도 꽃도 모두 보라색으로 물든 세상에서 하나뿐인 섬이에요. 보라색 라벤더 향기 속에서 걷다 보면 동화 속에 들어온 것 같은 착각이 들어요.",
+    "x": 32,
+    "y": 80,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/39/3567239.jpg"
+    ]
+  },
+  {
+    "name": "완도 청산도",
+    "tag": "슬로우시티 + 바다",
+    "emoji": "🐢",
+    "reason": "아시아 최초 슬로시티로 지정된 섬이에요. 드라마 봄의 왈츠 촬영지로도 유명하며, 청보리밭과 쪽빛 바다가 어우러진 풍경이 마음을 평온하게 해줘요.",
+    "x": 43,
+    "y": 87,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/86/2496586.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/87/2496587.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/69/2563869.jpg"
+    ]
+  },
+  {
+    "name": "고흥 나로도",
+    "tag": "우주센터 + 해변",
+    "emoji": "🚀",
+    "reason": "한국 최초 우주발사체를 쏘아 올린 나로우주센터가 있어요. 때 묻지 않은 청정 해변과 미르마루길의 탁 트인 전망이 조용한 힐링을 선사해요.",
+    "x": 52,
+    "y": 82,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/21/2835521.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/22/2835522.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/23/2835523.jpg"
+    ]
+  },
+  {
+    "name": "경주",
+    "tag": "역사 + 야경",
+    "emoji": "🏛️",
+    "reason": "천년 신라의 수도로 도시 전체가 거대한 박물관이에요. 대릉원의 거대한 고분군을 걷다가 야간 조명이 켜진 첨성대와 안압지를 보면 시간 여행을 하는 기분이에요.",
+    "x": 69,
+    "y": 62,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/74/1086674.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/75/1086675.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/76/1086676.jpg"
+    ]
+  },
+  {
+    "name": "안동 하회마을",
+    "tag": "유네스코 + 전통",
+    "emoji": "🎭",
+    "reason": "낙동강이 마을을 휘감아 도는 천혜의 입지에 600년 된 씨족 마을이 살아있어요. 하회별신굿탈놀이와 선유줄불놀이는 유네스코 등재 인류무형문화유산이에요.",
+    "x": 63,
+    "y": 47,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/00/1084800.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/01/1084801.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/09/1084809.jpg"
+    ]
+  },
+  {
+    "name": "포항 호미곶",
+    "tag": "해돋이 + 과메기",
+    "emoji": "🌅",
+    "reason": "한반도 최동단의 해돋이 명소로 새해 첫날 전국에서 사람이 몰려와요. 겨울 별미 과메기와 구룡포 일본인 가옥거리 역사 탐방도 빠질 수 없어요.",
+    "x": 75,
+    "y": 53,
+    "images": []
+  },
+  {
+    "name": "울릉도",
+    "tag": "독도 + 원시자연",
+    "emoji": "🏝️",
+    "reason": "육지와 완전히 단절된 화산섬으로 어디서도 볼 수 없는 원시 자연이 살아있어요. 독도 선착장에 발을 디디는 경험은 일생에 한 번쯤은 해봐야 할 일이에요.",
+    "x": 88,
+    "y": 42,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/22/1131822.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/48/1131848.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/56/1131856.jpg"
+    ]
+  },
+  {
+    "name": "영주 부석사",
+    "tag": "신라사찰 + 단풍",
+    "emoji": "🍂",
+    "reason": "안양루에서 바라보는 소백산 단풍 뷰가 국내 사찰 뷰 중 단연 최고예요. 무량수전은 현존하는 가장 아름다운 고려 목조 건축물로 꼽혀요.",
+    "x": 60,
+    "y": 40,
+    "images": []
+  },
+  {
+    "name": "문경 새재",
+    "tag": "옛길 + 도자기",
+    "emoji": "🏺",
+    "reason": "조선시대 영남에서 한양으로 가는 길목이었던 문경새재는 드라마 촬영지로도 유명해요. 문경 전통 도자기와 오미자 막걸리는 꼭 챙겨야 할 기념품이에요.",
+    "x": 56,
+    "y": 43,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/88/1120888.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/94/1120894.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/16/1120916.jpg"
+    ]
+  },
+  {
+    "name": "청송 주왕산",
+    "tag": "기암절벽 + 계곡",
+    "emoji": "🪨",
+    "reason": "수직으로 솟아오른 기암절벽과 그 사이를 흐르는 계곡이 병풍처럼 펼쳐져요. 주산지 왕버들 아침 안개는 국내 최고의 사진 명소로 손꼽혀요.",
+    "x": 67,
+    "y": 46,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/13/1989813.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/19/1989819.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/20/1989820.jpg"
+    ]
+  },
+  {
+    "name": "봉화 청량산",
+    "tag": "산악 + 은둔힐링",
+    "emoji": "🌿",
+    "reason": "퇴계 이황이 사랑했던 산으로 기암절벽과 청량사가 어우러진 비경이 펼쳐져요. 사람이 많지 않아 진정한 혼자만의 힐링을 즐길 수 있는 곳이에요.",
+    "x": 65,
+    "y": 40,
+    "images": []
+  },
+  {
+    "name": "울진 왕피천",
+    "tag": "에코트레일 + 계곡",
+    "emoji": "🌊",
+    "reason": "국내 최대 규모의 생태경관보전지역으로 오염되지 않은 원시 계곡이에요. 왕피천 트레킹은 문명과 단절된 자연 속에서 진정한 야생 탐험의 묘미를 선사해요.",
+    "x": 70,
+    "y": 43,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/04/2702804.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/05/2702805.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/06/2702806.jpg"
+    ]
+  },
+  {
+    "name": "부산 해운대",
+    "tag": "해변 + 도시",
+    "emoji": "🏖️",
+    "reason": "국내 최고의 도심 해변으로 마린시티의 화려한 야경과 백사장이 어우러져요. 광안대교 야경을 보며 먹는 씨앗호떡과 밀면은 부산 여행의 필수 코스예요.",
+    "x": 74,
+    "y": 72,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/23/1144423.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/21/1746321.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/05/1826805.jpg"
+    ]
+  },
+  {
+    "name": "부산 감천문화마을",
+    "tag": "벽화 + 골목",
+    "emoji": "🎨",
+    "reason": "6.25 피란민들의 애환이 담긴 달동네가 예술로 거듭난 곳이에요. 알록달록한 계단식 집들과 골목 곳곳의 예술 작품이 부산만의 독특한 감성을 만들어요.",
+    "x": 72,
+    "y": 74,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/05/1961605.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/92/2563892.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/35/2907535.jpg"
+    ]
+  },
+  {
+    "name": "통영",
+    "tag": "섬 + 예술",
+    "emoji": "⛵",
+    "reason": "이순신 장군의 한산대첩 현장이자 박경리, 김춘수, 윤이상이 태어난 예술의 도시예요. 미륵산 케이블카에서 바라보는 한려수도의 다도해 전경이 압도적이에요.",
+    "x": 62,
+    "y": 80,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/35/1172235.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/42/1172242.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/46/1172246.jpg"
+    ]
+  },
+  {
+    "name": "거제도",
+    "tag": "바다 + 자연",
+    "emoji": "🌊",
+    "reason": "외도 보타니아의 지중해풍 정원과 바람의 언덕 억새밭이 유명해요. 내도, 외도로 가는 유람선 위에서 보이는 쪽빛 남해가 잊기 힘든 풍경이에요.",
+    "x": 67,
+    "y": 80,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/83/1249283.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/97/1249297.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/03/1249303.jpg"
+    ]
+  },
+  {
+    "name": "남해 독일마을",
+    "tag": "이국감성 + 바다",
+    "emoji": "🌺",
+    "reason": "독일 파독 근로자들이 돌아와 만든 이국적인 마을로 유럽풍 주택과 남해 바다가 묘하게 어울려요. 물건 방조어부림과 함께 드라이브하기 좋은 해안 도로예요.",
+    "x": 57,
+    "y": 82,
+    "images": []
+  },
+  {
+    "name": "하동 악양",
+    "tag": "최참판댁 + 녹차",
+    "emoji": "🍵",
+    "reason": "박경리의 토지 배경지 최참판댁과 광활한 평사리 들판이 문학 여행의 감동을 선사해요. 화개장터와 쌍계사 십리 벚꽃길은 봄이면 전국에서 사람이 몰려와요.",
+    "x": 54,
+    "y": 76,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/71/1022571.jpg"
+    ]
+  },
+  {
+    "name": "합천 해인사",
+    "tag": "팔만대장경 + 가야산",
+    "emoji": "📿",
+    "reason": "팔만대장경이 보관된 법보종찰 해인사는 유네스코 세계문화유산이에요. 홍류동 계곡을 따라 걷는 단풍길은 가을 산사 여행의 최고봉이에요.",
+    "x": 59,
+    "y": 70,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/86/1162486.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/04/1162504.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/71/2505771.jpg"
+    ]
+  },
+  {
+    "name": "밀양 얼음골",
+    "tag": "얼음골 + 표충사",
+    "emoji": "🧊",
+    "reason": "한여름에도 얼음이 어는 신비로운 얼음골은 자연의 경이로움 그 자체예요. 사명대사의 혼이 깃든 표충사와 밀양 아리랑의 고장으로 역사도 풍성해요.",
+    "x": 65,
+    "y": 67,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/21/1836221.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/23/1836223.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/37/1836237.jpg"
+    ]
+  },
+  {
+    "name": "창녕 우포늪",
+    "tag": "생태습지 + 철새",
+    "emoji": "🦢",
+    "reason": "1억4천만년 전 형성된 국내 최대 자연 늪지대예요. 철새 도래지로 유명하며 가시연꽃이 피는 여름과 철새가 날아드는 겨울에 가장 아름다워요.",
+    "x": 63,
+    "y": 70,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/80/1960780.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/87/2563887.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/93/2563893.jpg"
+    ]
+  },
+  {
+    "name": "사천 실안낙조",
+    "tag": "노을 + 한려수도",
+    "emoji": "🌇",
+    "reason": "한려해상국립공원의 다도해를 배경으로 펼쳐지는 실안 낙조는 남해 최고의 일몰 명소예요. 삼천포대교와 창선·삼천포대교의 야경도 함께 즐길 수 있어요.",
+    "x": 59,
+    "y": 78,
+    "images": []
+  },
+  {
+    "name": "제주 한라산",
+    "tag": "트레킹 + 설경",
+    "emoji": "🏔️",
+    "reason": "남한 최고봉 백록담을 향한 트레킹은 제주 여행의 클라이맥스예요. 눈 쌓인 겨울 한라산은 그 어떤 산악 사진과도 비교할 수 없는 절경이에요.",
+    "x": 36,
+    "y": 99,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/55/1746355.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/84/1805684.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/86/1805686.jpg"
+    ]
+  },
+  {
+    "name": "제주 성산일출봉",
+    "tag": "일출 + 유네스코",
+    "emoji": "🌄",
+    "reason": "유네스코 세계자연유산으로 바다에서 솟아오른 분화구의 웅장함이 압도적이에요. 이름처럼 일출 명소이지만 성산 일출봉을 배경으로 한 우도 뷰도 최고예요.",
+    "x": 44,
+    "y": 97,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/09/1310909.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/70/1805570.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/78/1805678.jpg"
+    ]
+  },
+  {
+    "name": "제주 애월",
+    "tag": "카페 + 바다뷰",
+    "emoji": "☕",
+    "reason": "제주에서 가장 세련된 카페 거리가 형성된 곳이에요. 애월 해안도로를 따라 드라이브하며 바다가 보이는 카페에서 보내는 오후는 완벽한 제주 감성이에요.",
+    "x": 32,
+    "y": 97,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/23/1832823.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/47/1832847.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/15/2504215.jpg"
+    ]
+  },
+  {
+    "name": "제주 우도",
+    "tag": "산호해변 + 자전거",
+    "emoji": "🚲",
+    "reason": "새하얀 산호 모래 해변과 에메랄드빛 바다가 환상적인 작은 섬이에요. 자전거나 전동 킥보드로 섬을 한 바퀴 도는 것이 우도 여행의 정석이에요.",
+    "x": 45,
+    "y": 96,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/56/1260456.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/58/1260458.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/60/1260460.jpg"
+    ]
+  },
+  {
+    "name": "제주 서귀포",
+    "tag": "폭포 + 감귤",
+    "emoji": "🍊",
+    "reason": "정방폭포, 천지연폭포, 천제연폭포 세 개의 대폭포가 모두 있는 도시예요. 감귤 밭 사이를 드라이브하며 먹는 갓 딴 귤의 맛은 서귀포에서만 느낄 수 있어요.",
+    "x": 37,
+    "y": 101,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/32/1804332.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/33/1804333.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/12/1805412.jpg"
+    ]
+  },
+  {
+    "name": "제주 협재해변",
+    "tag": "에메랄드 바다",
+    "emoji": "🏝️",
+    "reason": "국내에서 카리브해와 가장 비슷한 에메랄드 빛 바다를 볼 수 있는 곳이에요. 바다 건너 비양도가 보이는 풍경은 여름 제주의 가장 아름다운 엽서가 돼요.",
+    "x": 31,
+    "y": 99,
+    "images": [
+      "http://tong.visitkorea.or.kr/cms2/website/67/2859367.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/70/2859370.jpg",
+      "http://tong.visitkorea.or.kr/cms2/website/81/2859381.jpg"
+    ]
+  }
+]
