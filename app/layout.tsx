@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://your-domain.com",
+    url: "https://dart-travel.vercel.app",
     siteName: "다트 뽑기",
     title: "다트 뽑기 | 랜덤 국내 여행지 추천",
     description: "지도에 다트를 던져 오늘의 여행지를 결정하세요. 전국 77개 국내 여행지 랜덤 추천",
     images: [
       {
-        url: "https://your-domain.com/og-image.png",
+        url: "https://dart-travel.vercel.app/opengraph-image",
         width: 1200,
         height: 630,
         alt: "다트 뽑기 - 랜덤 국내 여행지 추천",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "다트 뽑기 | 랜덤 국내 여행지 추천",
     description: "지도에 다트를 던져 오늘의 여행지를 결정하세요.",
-    images: ["https://your-domain.com/og-image.png"],
+    images: ["https://dart-travel.vercel.app/opengraph-image"],
   },
   robots: {
     index: true,
