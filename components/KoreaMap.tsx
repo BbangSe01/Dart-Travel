@@ -39,7 +39,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown }: Props) {
 
   const projectionRef = useRef<d3.GeoProjection | null>(null);
   const animFrameRef = useRef<number>(0);
-  const trailCounter = useRef(0);
 
   // 위경도 → SVG 좌표 변환
   function project(lat: number, lng: number): { x: number; y: number } | null {
@@ -117,8 +116,7 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown }: Props) {
       setDartAngle(angle);
 
       if (Math.floor(t * 20) > Math.floor(((now - 16 - startTime) / duration) * 20)) {
-        trailCounter.current++;
-        setTrail(prev => [...prev.slice(-12), { x, y, id: trailCounter.current }]);
+        setTrail(prev => [...prev.slice(-12), { x, y, id: Date.now() + Math.random() }]);
       }
 
       if (t < 1) {
