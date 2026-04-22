@@ -9,19 +9,24 @@ export default function Home() {
   const [landed, setLanded] = useState<Destination | null>(null);
   const [loading, setLoading] = useState(false);
   const [destDetail, setDestDetail] = useState<any>(null);
+  const [revealing, setRevealing] = useState(false);
 
   const handleLand = useCallback(async (dest: Destination) => {
-    setLanded(dest);
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`);
-      const data = await res.json();
-      setDestDetail(data);
-    } catch {
-      setDestDetail(null);
-    } finally {
-      setLoading(false);
-    }
+    setRevealing(true);
+    setTimeout(async () => {
+      setRevealing(false);
+      setLanded(dest);
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`);
+        const data = await res.json();
+        setDestDetail(data);
+      } catch {
+        setDestDetail(null);
+      } finally {
+        setLoading(false);
+      }
+    }, 3000);
   }, []);
 
   const handleReset = useCallback(() => {
@@ -29,10 +34,79 @@ export default function Home() {
     setLanded(null);
     setLoading(false);
     setDestDetail(null);
+    setRevealing(false);
   }, []);
 
   return (
     <main style={{ minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+      {/* 전체 화면 오버레이(결과 로딩 중) */}
+      <AnimatePresence>
+        {revealing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0, 0, 0, 0.55)',
+              backdropFilter: 'blur(2px)',
+              zIndex: 50,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '24px',
+            }}
+          >
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(24px, 4vw, 40px)',
+                color: '#ffffff',
+                margin: 0,
+                letterSpacing: '-0.02em',
+                textAlign: 'center',
+              }}
+            >
+              과연 그대의 목적지는..?
+            </motion.p>
+
+            {/* 점점점 애니메이션 */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{ display: 'flex', gap: '10px' }}
+            >
+              {[0, 1, 2].map(i => (
+                <motion.div
+                  key={i}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{
+                    duration: 0.7,
+                    repeat: Infinity,
+                    delay: i * 0.15,
+                    ease: 'easeInOut',
+                  }}
+                  style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    background: 'var(--accent)',
+                  }}
+                />
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 기존 레이아웃 */}
       <div
         style={{
           maxWidth: '1100px',
@@ -95,12 +169,14 @@ export default function Home() {
             />
           </div>
 
-          <AnimatePresence>
-            {landed && (
+          <AnimatePresence mode="wait">
+            {(landed || revealing) && (
               <motion.div
+                key="reset-btn"
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
                 style={{ marginTop: '12px', textAlign: 'center' }}
               >
                 <button
@@ -131,12 +207,18 @@ export default function Home() {
             )}
           </AnimatePresence>
         </div>
-
         {/* Right: Panel */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '84px' }}>
-          <AnimatePresence>
-            {!landed && (
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '84px', minHeight: '500px' }}>
+          <AnimatePresence mode="wait">
+            {!landed && !revealing && (
+              <motion.div
+                key="intro"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+              >
                 <div
                   style={{
                     background: 'linear-gradient(135deg, rgba(232,93,38,0.06) 0%, rgba(232,93,38,0.02) 100%)',
@@ -164,13 +246,7 @@ export default function Home() {
                     지도를 클릭하면 랜덤으로 국내 여행지를 추천해드려요.
                   </p>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
 
-          <AnimatePresence>
-            {!landed && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <div
                   style={{
                     background: '#ffffff',
@@ -219,10 +295,17 @@ export default function Home() {
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {landed && <CourseCard destination={landed} destDetail={destDetail} loading={loading} />}
+            {landed && (
+              <motion.div
+                key="landed"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                <CourseCard destination={landed} destDetail={destDetail} loading={loading} />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </div>

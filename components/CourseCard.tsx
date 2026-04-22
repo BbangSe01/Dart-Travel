@@ -26,9 +26,7 @@ export default function CourseCard({ destination, destDetail, loading }: Props) 
   const next = () => setCurrent(c => (c + 1) % images.length);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       style={{
         background: '#ffffff',
         border: '1px solid var(--border)',
@@ -216,7 +214,6 @@ export default function CourseCard({ destination, destDetail, loading }: Props) 
           </div>
         ) : (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-            {/* reason */}
             <p
               style={{
                 fontSize: '14px',
@@ -228,7 +225,6 @@ export default function CourseCard({ destination, destDetail, loading }: Props) 
               {destDetail?.reason ?? '여행지 정보를 불러오는 중이에요.'}
             </p>
 
-            {/* tip */}
             {destDetail?.tip && (
               <div
                 style={{
@@ -271,6 +267,6 @@ export default function CourseCard({ destination, destDetail, loading }: Props) 
           </p>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
