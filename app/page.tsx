@@ -2,7 +2,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import KoreaMap, { type Destination } from "@/components/KoreaMap";
-import OptionsPanel, { type TravelOptions } from "@/components/OptionsPanel";
 import CourseCard from "@/components/CourseCard";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
   const [landed, setLanded] = useState<Destination | null>(null);
   const [courseData, setCourseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [options, setOptions] = useState<TravelOptions>({ mode: "random" });
   const [destDetail, setDestDetail] = useState<any>(null);
 
   const handleLand = useCallback(async (dest: Destination) => {
@@ -133,7 +131,25 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
               >
-                <OptionsPanel options={options} onChange={setOptions} />
+                <div style={{
+      background: "#ffffff",
+      border: "1px solid var(--border)",
+      borderRadius: "12px",
+      padding: "16px 20px",
+      boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+    }}>
+      <p style={{
+        fontFamily: "var(--font-mono)",
+        fontSize: "10px",
+        color: "var(--text-light)",
+        letterSpacing: "0.12em",
+        marginBottom: "12px",
+      }}>TRAVEL OPTIONS</p>
+
+      <p style={{ fontSize: "13px", color: "var(--text-muted)", margin: 0 }}>
+        지도를 클릭하면 랜덤으로 국내 여행지를 추천해드려요.
+      </p>
+    </div>
               </motion.div>
             )}
           </AnimatePresence>
