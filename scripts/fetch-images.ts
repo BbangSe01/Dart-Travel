@@ -49,6 +49,7 @@ async function fetchImages(keyword: string): Promise<string[]> {
       const images = list
         .map((item: any) => item.galWebImageUrl)
         .filter(Boolean)
+        .map((url: string) => url.replace('http://', 'https://'))
         .slice(0, 3);
 
       if (images.length > 0) return images; // 이미지 찾으면 즉시 반환
