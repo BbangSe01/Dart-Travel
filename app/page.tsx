@@ -39,9 +39,19 @@ export default function Home() {
     setRevealing(false);
   }, []);
 
+  // 공통 props
+  const mapProps = {
+    onLand: handleLand,
+    isThrown,
+    setIsThrown: (v: boolean) => {
+      setIsThrown(v);
+      if (!v) handleReset();
+    },
+  };
+
   return (
     <main style={{ minHeight: '100vh', position: 'relative', zIndex: 1 }}>
-      {/* 공통: 전체 화면 오버레이 */}
+      {/* ── 공통: 전체 화면 오버레이 ── */}
       <AnimatePresence>
         {revealing && (
           <motion.div
@@ -97,83 +107,17 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* 모바일 전용: 센터 모달 */}
-      <AnimatePresence>
-        {isMobile && landed && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 40,
-              background: 'rgba(0,0,0,0.5)',
-              backdropFilter: 'blur(2px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '16px',
-            }}
-            onClick={handleReset}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 8 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              style={{ width: '100%', maxWidth: '420px', maxHeight: '85vh', overflowY: 'auto' }}
-              onClick={e => e.stopPropagation()}
-            >
-              <CourseCard destination={landed} destDetail={destDetail} loading={loading} isMobile />
-              <button
-                onClick={handleReset}
-                style={{
-                  width: '100%',
-                  marginTop: '12px',
-                  padding: '12px',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border)',
-                  background: 'rgba(255,255,255,0.95)',
-                  color: 'var(--text-muted)',
-                  fontSize: '13px',
-                  fontFamily: 'var(--font-body)',
-                  cursor: 'pointer',
-                }}
-              >
-                🎯 다시 던지기
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 공통 레이아웃 */}
-      <div
-        style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
-          padding: isMobile ? '24px 16px' : '40px 24px',
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr',
-          gap: isMobile ? '16px' : '32px',
-          alignItems: 'start',
-        }}
-      >
-        {/* Left: 헤더 + 지도 */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ marginBottom: isMobile ? '16px' : '24px' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '10px', marginBottom: '6px' }}>
-              <span style={{ fontSize: isMobile ? '28px' : '35px', paddingBottom: isMobile ? '0' : '0.8rem' }}>🎯</span>
+      {isMobile ? (
+        /* ────모바일 레이아웃───── */
+        <div style={{ padding: '24px 16px' }}>
+          {/* 헤더 */}
+          <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+              <span style={{ fontSize: '28px' }}>🎯</span>
               <h1
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: isMobile ? 'clamp(24px, 6vw, 32px)' : 'clamp(34px, 4.5vw, 40px)',
+                  fontSize: 'clamp(24px, 6vw, 32px)',
                   fontWeight: 400,
                   color: 'var(--text-primary)',
                   margin: 0,
@@ -186,7 +130,7 @@ export default function Home() {
             </div>
             <p
               style={{
-                fontSize: isMobile ? '13px' : '15px',
+                fontSize: '13px',
                 color: 'var(--text-muted)',
                 fontFamily: 'var(--font-body)',
                 fontWeight: 300,
@@ -197,61 +141,59 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* 모바일 전용: 안내 카드 가로 배치 */}
-          {isMobile && (
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
-              <div
+          {/* 안내 카드 가로 배치 */}
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
+            <div
+              style={{
+                flex: 1,
+                borderRadius: '12px',
+                padding: '12px 14px',
+                background: 'linear-gradient(135deg, rgba(232,93,38,0.06) 0%, rgba(232,93,38,0.02) 100%)',
+                border: '1px solid rgba(232,93,38,0.2)',
+              }}
+            >
+              <p
                 style={{
-                  flex: 1,
-                  borderRadius: '12px',
-                  padding: '12px 14px',
-                  background: 'linear-gradient(135deg, rgba(232,93,38,0.06) 0%, rgba(232,93,38,0.02) 100%)',
-                  border: '1px solid rgba(232,93,38,0.2)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  color: 'var(--accent)',
+                  letterSpacing: '0.1em',
+                  margin: '0 0 4px',
+                  fontWeight: 700,
                 }}
               >
-                <p
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
-                    color: 'var(--accent)',
-                    letterSpacing: '0.1em',
-                    margin: '0 0 4px',
-                    fontWeight: 700,
-                  }}
-                >
-                  TRAVEL OPTIONS
-                </p>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-                  전국 135개 여행지 랜덤 추천
-                </p>
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  borderRadius: '12px',
-                  padding: '12px 14px',
-                  background: '#ffffff',
-                  border: '1px solid var(--border)',
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
-                    color: 'var(--text-light)',
-                    letterSpacing: '0.1em',
-                    margin: '0 0 4px',
-                    fontWeight: 700,
-                  }}
-                >
-                  HOW TO USE
-                </p>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-                  지도 클릭 → 다트 발사 → 여행지 공개
-                </p>
-              </div>
+                TRAVEL OPTIONS
+              </p>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
+                전국 135개 여행지 랜덤 추천
+              </p>
             </div>
-          )}
+            <div
+              style={{
+                flex: 1,
+                borderRadius: '12px',
+                padding: '12px 14px',
+                background: '#ffffff',
+                border: '1px solid var(--border)',
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  color: 'var(--text-light)',
+                  letterSpacing: '0.1em',
+                  margin: '0 0 4px',
+                  fontWeight: 700,
+                }}
+              >
+                HOW TO USE
+              </p>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
+                지도 클릭 → 다트 발사 → 여행지 공개
+              </p>
+            </div>
+          </div>
 
           {/* 지도 */}
           <div
@@ -259,22 +201,126 @@ export default function Home() {
               background: '#ffffff',
               borderRadius: '20px',
               border: '1px solid var(--border)',
-              padding: isMobile ? '12px' : '16px',
+              padding: '12px',
               boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
             }}
           >
-            <KoreaMap
-              onLand={handleLand}
-              isThrown={isThrown}
-              setIsThrown={v => {
-                setIsThrown(v);
-                if (!v) handleReset();
-              }}
-            />
+            <KoreaMap {...mapProps} />
           </div>
 
-          {/* PC 전용: 다시 던지기 버튼 */}
-          {!isMobile && (
+          {/* 센터 모달 */}
+          <AnimatePresence>
+            {landed && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  zIndex: 40,
+                  background: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(2px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '16px',
+                }}
+                onClick={handleReset}
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92, y: 16 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  style={{ width: '100%', maxWidth: '420px', maxHeight: '85vh', overflowY: 'auto' }}
+                  onClick={e => e.stopPropagation()}
+                >
+                  <CourseCard destination={landed} destDetail={destDetail} loading={loading} isMobile />
+                  <button
+                    onClick={handleReset}
+                    style={{
+                      width: '100%',
+                      marginTop: '12px',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      border: '1px solid var(--border)',
+                      background: 'rgba(255,255,255,0.95)',
+                      color: 'var(--text-muted)',
+                      fontSize: '13px',
+                      fontFamily: 'var(--font-body)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    🎯 다시 던지기
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ) : (
+        /* ──────PC/태블릿 레이아웃─────── */
+        <div
+          style={{
+            maxWidth: '1100px',
+            margin: '0 auto',
+            padding: '40px 24px',
+            display: 'grid',
+            gridTemplateColumns: '1.2fr 1fr',
+            gap: '32px',
+            alignItems: 'start',
+          }}
+        >
+          {/* Left: 헤더 + 지도 */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{ marginBottom: '24px' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                <span style={{ fontSize: '35px', paddingBottom: '0.8rem' }}>🎯</span>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(34px, 4.5vw, 40px)',
+                    fontWeight: 400,
+                    color: 'var(--text-primary)',
+                    margin: 0,
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.15,
+                  }}
+                >
+                  다트 여행, 오늘은 어디로?
+                </h1>
+              </div>
+              <p
+                style={{
+                  fontSize: '15px',
+                  color: 'var(--text-muted)',
+                  fontFamily: 'var(--font-body)',
+                  fontWeight: 300,
+                  margin: 0,
+                }}
+              >
+                랜덤 국내 여행지 추천 — 지도를 클릭해보세요
+              </p>
+            </motion.div>
+
+            <div
+              style={{
+                background: '#ffffff',
+                borderRadius: '20px',
+                border: '1px solid var(--border)',
+                padding: '16px',
+                boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
+              }}
+            >
+              <KoreaMap {...mapProps} />
+            </div>
+
             <AnimatePresence mode="wait">
               {(landed || revealing) && (
                 <motion.div
@@ -312,11 +358,9 @@ export default function Home() {
                 </motion.div>
               )}
             </AnimatePresence>
-          )}
-        </div>
+          </div>
 
-        {/* Right: Panel — PC 전용 */}
-        {!isMobile && (
+          {/* Right: Panel */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '84px' }}>
             <AnimatePresence mode="wait">
               {!landed && !revealing && (
@@ -418,8 +462,8 @@ export default function Home() {
               )}
             </AnimatePresence>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </main>
   );
 }
