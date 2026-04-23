@@ -10,6 +10,12 @@ interface DestDetail {
   reason: string;
   tip?: string;
   images: string[];
+  blogs?: {
+    title: string;
+    link: string;
+    description: string;
+    bloggername: string;
+  }[];
 }
 
 interface Props {
@@ -17,9 +23,10 @@ interface Props {
   destDetail: DestDetail | null;
   loading: boolean;
   isMobile?: boolean;
+  noBorder?: boolean;
 }
 
-export default function CourseCard({ destination, destDetail, loading, isMobile = false }: Props) {
+export default function CourseCard({ destination, destDetail, loading, isMobile = false, noBorder = false }: Props) {
   const [current, setCurrent] = useState(0);
   const images = destDetail?.images ?? [];
 
@@ -30,10 +37,14 @@ export default function CourseCard({ destination, destDetail, loading, isMobile 
     <div
       style={{
         background: '#ffffff',
-        border: '1px solid var(--border)',
-        borderRadius: '16px',
+        border: noBorder ? 'none' : '1px solid var(--border)',
+        borderRight: noBorder ? '1px solid var(--border)' : undefined,
+        borderRadius: noBorder ? '0' : '16px',
         overflow: 'hidden',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
+        boxShadow: noBorder ? 'none' : '0 4px 24px rgba(0,0,0,0.07)',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {/* 이미지 캐러셀 */}

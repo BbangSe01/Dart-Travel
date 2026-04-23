@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "fetch-images": "ts-node --project scripts/tsconfig.json scripts/fetch-images.ts"
+    "fetch-images": "ts-node --project scripts/tsconfig.json scripts/fetch-images.ts",
+    "fetch-blogs": "ts-node --project scripts/tsconfig.json scripts/fetch-blogs.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
