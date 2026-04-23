@@ -16,9 +16,10 @@ interface Props {
   destination: Destination;
   destDetail: DestDetail | null;
   loading: boolean;
+  isMobile?: boolean;
 }
 
-export default function CourseCard({ destination, destDetail, loading }: Props) {
+export default function CourseCard({ destination, destDetail, loading, isMobile = false }: Props) {
   const [current, setCurrent] = useState(0);
   const images = destDetail?.images ?? [];
 
@@ -36,7 +37,15 @@ export default function CourseCard({ destination, destDetail, loading }: Props) 
       }}
     >
       {/* 이미지 캐러셀 */}
-      <div style={{ position: 'relative', width: '100%', height: '220px', background: '#f0ede8', overflow: 'hidden' }}>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: isMobile ? '180px' : '220px',
+          background: '#f0ede8',
+          overflow: 'hidden',
+        }}
+      >
         <AnimatePresence mode="wait">
           {loading ? (
             <motion.div
