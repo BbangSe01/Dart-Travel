@@ -273,20 +273,19 @@ export default function CourseCard({ destination, destDetail, loading, isMobile 
             )}
           </motion.div>
         )}
-
-        {!loading && images.length > 0 && (
-          <p
-            style={{
-              fontSize: '10px',
-              color: 'var(--text-light)',
-              margin: '12px 0 0',
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
-            사진 출처: 한국관광공사
-          </p>
-        )}
       </div>
+      {!loading && images.length > 0 && (
+        <p
+          style={{
+            fontSize: '10px',
+            color: 'var(--text-light)',
+            margin: 'auto 1rem 0.5rem', // ← marginTop: auto로 최하단 고정
+            fontFamily: 'var(--font-mono)',
+          }}
+        >
+          사진 출처: 한국관광공사
+        </p>
+      )}
     </div>
   );
 }
