@@ -29,7 +29,7 @@ export default function ResultSet({ landed, destDetail, loading, isMobile = fals
       style={{
         display: 'grid',
         gridTemplateColumns: 'minmax(0, 1fr) 28px minmax(0, 0.75fr)',
-        alignItems: 'start', // stretch → start로 변경
+        alignItems: 'stretch',
         border: '1px solid var(--border)',
         borderRadius: '16px',
         overflow: 'hidden', // borderRadius 클리핑용
@@ -71,9 +71,11 @@ export default function ResultSet({ landed, destDetail, loading, isMobile = fals
       {!loading && destDetail?.blogs && destDetail.blogs.length > 0 ? (
         <div
           style={{
-            maxHeight: '530px',
+            height: '100%',
             overflowY: 'auto',
             alignSelf: 'stretch',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <BlogPreview blogs={destDetail.blogs} noBorder />
