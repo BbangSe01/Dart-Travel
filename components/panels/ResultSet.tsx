@@ -27,25 +27,27 @@ export default function ResultSet({ landed, destDetail, loading, isMobile = fals
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1fr) 28px minmax(0, 0.75fr)',
-        alignItems: 'stretch',
-        border: '1px solid var(--border)',
         borderRadius: '16px',
-        overflow: 'hidden', // borderRadius 클리핑용
+        border: '1px solid var(--border)',
         boxShadow: '0 4px 12px rgba(0,0,0,0.06), 8px 12px 24px rgba(0,0,0,0.12), 12px 16px 32px rgba(0,0,0,0.08)',
+        maxHeight: '550px',
+        display: 'flex',
+        overflow: 'hidden', // radius 클리핑만
       }}
     >
-      {/* CourseCard — 고정 높이 */}
-      <CourseCard destination={landed} destDetail={destDetail} loading={loading} noBorder />
+      {/* CourseCard */}
+      <div style={{ flex: '1 1 0', minWidth: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <CourseCard destination={landed} destDetail={destDetail} loading={loading} noBorder />
+      </div>
 
-      {/* 스프링 고리 — CourseCard 높이에 맞춤 */}
+      {/* 스프링 고리 */}
       <div
         style={{
+          width: '28px',
+          flexShrink: 0,
           background: '#e8e4de',
           borderLeft: '1px solid var(--border)',
           borderRight: '1px solid var(--border)',
-          alignSelf: 'stretch', // 스프링은 전체 높이
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -67,22 +69,21 @@ export default function ResultSet({ landed, destDetail, loading, isMobile = fals
         ))}
       </div>
 
-      {/* BlogPreview — 독립 스크롤, CourseCard 높이에 맞춘 maxHeight */}
-      {!loading && destDetail?.blogs && destDetail.blogs.length > 0 ? (
-        <div
-          style={{
-            height: '100%',
-            overflowY: 'auto',
-            alignSelf: 'stretch',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
+      {/* BlogPreview */}
+      <div
+        style={{
+          flex: '0 0 calc(0.75 / 1.75 * 100%)',
+          minWidth: 0,
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          background: '#ffffff',
+        }}
+      >
+        {!loading && destDetail?.blogs && destDetail.blogs.length > 0 && (
           <BlogPreview blogs={destDetail.blogs} noBorder />
-        </div>
-      ) : (
-        <div style={{ background: '#ffffff', alignSelf: 'stretch' }} />
-      )}
+        )}
+      </div>
     </div>
   );
 }

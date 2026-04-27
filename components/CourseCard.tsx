@@ -185,7 +185,7 @@ export default function CourseCard({ destination, destDetail, loading, isMobile 
       </div>
 
       {/* 텍스트 영역 */}
-      <div style={{ padding: '20px 24px' }}>
+      <div style={{ padding: '20px 24px', flex: 1, overflowY: 'auto', minHeight: 0 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '14px' }}>
           <span style={{ fontSize: '32px', lineHeight: 1 }}>{destination.emoji}</span>
           <div>
