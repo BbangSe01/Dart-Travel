@@ -91,6 +91,7 @@ export default function DesktopLayout({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
+              style={{ willChange: 'opacity, transform' }}
             >
               <ResultSet landed={landed} destDetail={destDetail} loading={loading} />
             </motion.div>

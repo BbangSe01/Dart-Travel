@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
 
 interface Blog {
   title: string;
@@ -17,10 +16,7 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
   if (!blogs || blogs.length === 0) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15, duration: 0.3, ease: 'easeOut' }}
+    <div
       style={{
         background: '#ffffff',
         border: noBorder ? 'none' : '1px solid var(--border)',
@@ -44,24 +40,22 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: '20px', lineHeight: 1, paddingBottom: '5px' }}>🗺️</span>
-        <div>
-          <h3
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '18px',
-              fontWeight: 400,
-              color: 'var(--text-primary)',
-              margin: 0,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            여행 맛보기
-          </h3>
-        </div>
+        <span style={{ fontSize: '20px', lineHeight: 1 }}>🗺️</span>
+        <h3
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '18px',
+            fontWeight: 400,
+            color: 'var(--text-primary)',
+            margin: 0,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          여행 맛보기
+        </h3>
       </div>
 
-      {/* 블로그 리스트 — 남은 공간 채우기 */}
+      {/* 블로그 리스트 */}
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         {blogs.map((blog, i) => (
           <a
@@ -72,16 +66,10 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
             style={{ textDecoration: 'none', display: 'block' }}
           >
             <div
+              className="blog-item"
               style={{
                 padding: '16px 24px',
                 borderBottom: i < blogs.length - 1 ? '1px solid var(--border)' : 'none',
-                transition: 'background 0.15s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(232,93,38,0.03)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'transparent';
               }}
             >
               <p
@@ -120,37 +108,6 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
         ))}
       </div>
 
-      {/* 스프링 고리 구분선 */}
-      {noBorder && (
-        <div
-          style={{
-            position: 'absolute',
-            left: '-1px',
-            top: 0,
-            bottom: 0,
-            width: '24px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'space-evenly',
-            pointerEvents: 'none',
-          }}
-        >
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: '16px',
-                height: '16px',
-                borderRadius: '50%',
-                border: '2px solid var(--border)',
-                background: 'var(--bg-deep)',
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       {/* 출처 */}
       <div style={{ padding: '10px 24px', flexShrink: 0 }}>
         <p
@@ -164,6 +121,6 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
           검색 출처: 네이버 블로그
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }

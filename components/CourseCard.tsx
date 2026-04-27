@@ -219,8 +219,8 @@ export default function CourseCard({ destination, destDetail, loading, isMobile 
         </div>
 
         {loading ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {[100, 85, 70].map((w, i) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minHeight: '195px' }}>
+            {[100, 85, 70, 60, 45].map((w, i) => (
               <div
                 key={i}
                 style={{
