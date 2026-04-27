@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/MapPanel';
 import ResultSet from '@/components/panels/ResultSet';
 import type { Destination } from '@/components/KoreaMap';
+import { useCallback, useState } from 'react';
 
 interface Props {
   landed: Destination | null;
@@ -25,6 +26,17 @@ export default function MobileLayout({
   handleReset,
   setIsThrown,
 }: Props) {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = useCallback(() => {
+    const base = typeof window !== 'undefined' ? window.location.origin : 'https://dart-travel.vercel.app';
+    const url = `${base}?dest=${encodeURIComponent(landed!.name)}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [landed]);
+
   return (
     <div style={{ padding: '24px 16px' }}>
       {/* 헤더 */}
@@ -142,23 +154,43 @@ export default function MobileLayout({
               onClick={e => e.stopPropagation()}
             >
               <ResultSet landed={landed} destDetail={destDetail} loading={loading} isMobile />
-              <button
-                onClick={handleReset}
-                style={{
-                  width: '100%',
-                  marginTop: '12px',
-                  padding: '12px',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border)',
-                  background: 'rgba(255,255,255,0.95)',
-                  color: 'var(--text-muted)',
-                  fontSize: '13px',
-                  fontFamily: 'var(--font-body)',
-                  cursor: 'pointer',
-                }}
-              >
-                🎯 다시 던지기
-              </button>
+              {!loading && (
+                <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                  <button
+                    onClick={handleShare}
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      borderRadius: '12px',
+                      border: `1px solid ${copied ? 'var(--accent)' : 'var(--border)'}`,
+                      background: copied ? 'var(--accent)' : 'rgba(255,255,255,0.95)',
+                      color: copied ? '#ffffff' : 'var(--text-muted)',
+                      fontSize: '13px',
+                      fontFamily: 'var(--font-body)',
+                      cursor: 'pointer',
+                      transition: 'all 0.18s',
+                    }}
+                  >
+                    {copied ? '✓ 복사됨' : '🔗 링크 복사'}
+                  </button>
+                  <button
+                    onClick={handleReset}
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      borderRadius: '12px',
+                      border: '1px solid var(--border)',
+                      background: 'rgba(255,255,255,0.95)',
+                      color: 'var(--text-muted)',
+                      fontSize: '13px',
+                      fontFamily: 'var(--font-body)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    🎯 다시 던지기
+                  </button>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}

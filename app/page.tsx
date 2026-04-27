@@ -1,13 +1,15 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import type { Destination } from '@/components/KoreaMap';
+import { DESTINATIONS } from '@/data/destinations-client';
 import RevealOverlay from '@/components/RevealOverlay';
 import MobileLayout from '@/components/layout/MobileLayout';
 import TabletLayout from '@/components/layout/TabletLayout';
 import DesktopLayout from '@/components/layout/DesktopLayout';
 
-export default function Home() {
+function HomeContent() {
   const [isThrown, setIsThrown] = useState(false);
   const [landed, setLanded] = useState<Destination | null>(null);
   const [loading, setLoading] = useState(false);
@@ -15,6 +17,36 @@ export default function Home() {
   const [revealing, setRevealing] = useState(false);
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(max-width: 1100px)');
+  const searchParams = useSearchParams();
+
+  // URL 파라미터로 자동 결과 표시
+  useEffect(() => {
+    const dest = searchParams.get('dest');
+    if (!dest) return;
+
+    const load = async () => {
+      // destinations-client에서 먼저 기본 정보 찾기
+      const found = DESTINATIONS.find(d => d.name === dest);
+      if (!found) return;
+
+      setLanded(found);
+      setIsThrown(true);
+      setLoading(true);
+
+      try {
+        const res = await fetch(`/api/destination?name=${encodeURIComponent(dest)}`);
+        const data = await res.json();
+        if (data.error) return;
+        setDestDetail(data);
+      } catch {
+        setDestDetail(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, [searchParams]);
 
   const handleLand = useCallback(async (dest: Destination) => {
     setRevealing(true);
@@ -40,6 +72,7 @@ export default function Home() {
     setLoading(false);
     setDestDetail(null);
     setRevealing(false);
+    window.history.replaceState({}, '', '/');
   }, []);
 
   const layoutProps = {
@@ -64,5 +97,13 @@ export default function Home() {
         <DesktopLayout {...layoutProps} />
       )}
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }
