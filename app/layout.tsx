@@ -25,14 +25,23 @@ export async function generateMetadata({ searchParams }: { searchParams: { dest?
             title: `다트 여행 — ${data.name} ${data.emoji}`,
             description: data.reason?.slice(0, 100) ?? `오늘의 여행지는 ${data.name}!`,
             images: data.images?.[0]
-              ? [{ url: data.images[0], width: 1200, height: 630, alt: data.name }]
+              ? [
+                  {
+                    url: `https://dart-travel.vercel.app/api/image-proxy?url=${encodeURIComponent(data.images[0])}`,
+                    width: 1200,
+                    height: 630,
+                    alt: data.name,
+                  },
+                ]
               : [{ url: 'https://dart-travel.vercel.app/opengraph-image', width: 1200, height: 630 }],
           },
           twitter: {
             card: 'summary_large_image',
             title: `다트 여행 — ${data.name} ${data.emoji}`,
             description: data.reason?.slice(0, 100) ?? `오늘의 여행지는 ${data.name}!`,
-            images: data.images?.[0] ? [data.images[0]] : ['https://dart-travel.vercel.app/opengraph-image'],
+            images: data.images?.[0]
+              ? [`https://dart-travel.vercel.app/api/image-proxy?url=${encodeURIComponent(data.images[0])}`]
+              : ['https://dart-travel.vercel.app/opengraph-image'],
           },
           robots: { index: true, follow: true },
           verification: { google: 'hkMTTYkbUeH_Y9R4OVOuj4-nOnL9uMk-UvGja_Z5K9s' },
