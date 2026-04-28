@@ -83,7 +83,7 @@ export default function MobileLayout({
             TRAVEL OPTIONS
           </p>
           <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-            전국 135개 여행지 랜덤 추천
+            전국 국내 여행지 랜덤 추천!
           </p>
         </div>
         <div
