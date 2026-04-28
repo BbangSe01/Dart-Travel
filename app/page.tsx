@@ -47,16 +47,19 @@ function HomeContent() {
 
   const handleLand = useCallback(async (dest: Destination) => {
     setRevealing(true);
+
+    // fetch와 3초 타이머 동시 시작
+    const fetchPromise = fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`)
+      .then(res => res.json())
+      .catch(() => null);
+
     setTimeout(async () => {
       setRevealing(false);
       setLanded(dest);
       setLoading(true);
       try {
-        const res = await fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`);
-        const data = await res.json();
+        const data = await fetchPromise; // 이미 진행 중이거나 완료된 fetch를 기다림
         setDestDetail(data);
-      } catch {
-        setDestDetail(null);
       } finally {
         setLoading(false);
       }
