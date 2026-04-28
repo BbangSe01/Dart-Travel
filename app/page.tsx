@@ -2,8 +2,8 @@
 import { useState, useCallback, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import type { Destination } from '@/components/KoreaMap';
 import { DESTINATIONS } from '@/data/destinations-client';
+import type { Destination } from '@/components/KoreaMap';
 import RevealOverlay from '@/components/RevealOverlay';
 import MobileLayout from '@/components/layout/MobileLayout';
 import TabletLayout from '@/components/layout/TabletLayout';
@@ -19,20 +19,17 @@ function HomeContent() {
   const isTablet = useMediaQuery('(max-width: 1100px)');
   const searchParams = useSearchParams();
 
-  // URL 파라미터로 자동 결과 표시
   useEffect(() => {
     const dest = searchParams.get('dest');
     if (!dest) return;
 
-    const load = async () => {
-      // destinations-client에서 먼저 기본 정보 찾기
-      const found = DESTINATIONS.find(d => d.name === dest);
-      if (!found) return;
+    const found = DESTINATIONS.find(d => d.name === dest);
+    if (!found) return;
 
+    const load = async () => {
       setLanded(found);
       setIsThrown(true);
       setLoading(true);
-
       try {
         const res = await fetch(`/api/destination?name=${encodeURIComponent(dest)}`);
         const data = await res.json();
