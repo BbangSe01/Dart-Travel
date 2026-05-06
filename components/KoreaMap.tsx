@@ -20,12 +20,13 @@ interface Props {
   onLand: (dest: Destination) => void;
   isThrown: boolean;
   setIsThrown: (v: boolean) => void;
+  filteredDestinations: Destination[];
 }
 
 const WIDTH = 500;
 const HEIGHT = 600;
 
-export default function KoreaMap({ onLand, isThrown, setIsThrown }: Props) {
+export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestinations }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [dartPos, setDartPos] = useState<DartPos | null>(null);
   const [dartAngle, setDartAngle] = useState(0);
@@ -82,7 +83,8 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown }: Props) {
   function handleClick() {
     if (isThrown) return;
 
-    const dest = DESTINATIONS[Math.floor(Math.random() * DESTINATIONS.length)];
+    const pool = filteredDestinations.length > 0 ? filteredDestinations : DESTINATIONS;
+    const dest = pool[Math.floor(Math.random() * pool.length)];
     const destPos = project(dest.lat, dest.lng);
     if (!destPos) return;
 

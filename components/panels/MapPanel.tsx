@@ -9,6 +9,7 @@ interface Props {
   handleLand: (dest: Destination) => void;
   handleReset: () => void;
   setIsThrown: (v: boolean) => void;
+  filteredDestinations: Destination[];
   padding?: string;
 }
 
@@ -19,6 +20,7 @@ export default function MapPanel({
   handleLand,
   handleReset,
   setIsThrown,
+  filteredDestinations,
   padding = '16px',
 }: Props) {
   const mapProps = {
@@ -28,6 +30,7 @@ export default function MapPanel({
       setIsThrown(v);
       if (!v) handleReset();
     },
+    filteredDestinations,
   };
 
   return (

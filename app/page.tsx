@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback, useEffect, Suspense } from 'react';
+import { useState, useCallback, useEffect, Suspense, useMemo } from 'react'; // useMemo 추가
 import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { DESTINATIONS } from '@/data/destinations-client';
@@ -8,6 +8,7 @@ import RevealOverlay from '@/components/RevealOverlay';
 import MobileLayout from '@/components/layout/MobileLayout';
 import TabletLayout from '@/components/layout/TabletLayout';
 import DesktopLayout from '@/components/layout/DesktopLayout';
+import { type FilterState } from '@/components/InfoPanel';
 
 function HomeContent() {
   const [isThrown, setIsThrown] = useState(false);
@@ -15,9 +16,27 @@ function HomeContent() {
   const [loading, setLoading] = useState(false);
   const [destDetail, setDestDetail] = useState<any>(null);
   const [revealing, setRevealing] = useState(false);
+  const [filter, setFilter] = useState<FilterState>({ seasons: [], themes: [] });
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(max-width: 1100px)');
   const searchParams = useSearchParams();
+
+  const filteredDestinations = useMemo(() => {
+    // 계절/테마 단일로는 OR 연산. 계절과 테마는 AND 연산
+    const { seasons, themes } = filter;
+    if (seasons.length === 0 && themes.length === 0) return DESTINATIONS;
+    const test = DESTINATIONS.filter(d => {
+      const seasonMatch = seasons.length === 0 || seasons.some(s => d.season.includes(s));
+      const themeMatch = themes.length === 0 || themes.some(t => d.theme.includes(t));
+      return seasonMatch && themeMatch;
+    });
+    console.log('test', test);
+    return DESTINATIONS.filter(d => {
+      const seasonMatch = seasons.length === 0 || seasons.some(s => d.season.includes(s));
+      const themeMatch = themes.length === 0 || themes.some(t => d.theme.includes(t));
+      return seasonMatch && themeMatch;
+    });
+  }, [filter]);
 
   useEffect(() => {
     const dest = searchParams.get('dest');
@@ -48,7 +67,6 @@ function HomeContent() {
   const handleLand = useCallback(async (dest: Destination) => {
     setRevealing(true);
 
-    // fetch와 3초 타이머 동시 시작
     const fetchPromise = fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`)
       .then(res => res.json())
       .catch(() => null);
@@ -58,7 +76,7 @@ function HomeContent() {
       setLanded(dest);
       setLoading(true);
       try {
-        const data = await fetchPromise; // 이미 진행 중이거나 완료된 fetch를 기다림
+        const data = await fetchPromise;
         setDestDetail(data);
       } finally {
         setLoading(false);
@@ -84,6 +102,8 @@ function HomeContent() {
     handleLand,
     handleReset,
     setIsThrown,
+    filteredDestinations,
+    onFilterChange: setFilter,
   };
 
   return (

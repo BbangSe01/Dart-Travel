@@ -1,9 +1,10 @@
 'use client';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/MapPanel';
 import ResultSet from '@/components/panels/ResultSet';
+import InfoPanel from '@/components/InfoPanel';
 import type { Destination } from '@/components/KoreaMap';
-import { useCallback, useState } from 'react';
 
 interface Props {
   landed: Destination | null;
@@ -14,6 +15,8 @@ interface Props {
   handleLand: (dest: Destination) => void;
   handleReset: () => void;
   setIsThrown: (v: boolean) => void;
+  filteredDestinations: Destination[];
+  onFilterChange: (filter: any) => void;
 }
 
 export default function MobileLayout({
@@ -25,6 +28,8 @@ export default function MobileLayout({
   handleLand,
   handleReset,
   setIsThrown,
+  filteredDestinations,
+  onFilterChange,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -41,7 +46,7 @@ export default function MobileLayout({
     <div style={{ padding: '24px 16px' }}>
       {/* 헤더 */}
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '28px' }}>🎯</span>
           <h1
             style={{
@@ -59,60 +64,6 @@ export default function MobileLayout({
         </div>
       </motion.div>
 
-      {/* 안내 카드 */}
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
-        <div
-          style={{
-            flex: 1,
-            borderRadius: '12px',
-            padding: '12px 14px',
-            background: 'linear-gradient(135deg, rgba(232,93,38,0.06) 0%, rgba(232,93,38,0.02) 100%)',
-            border: '1px solid rgba(232,93,38,0.2)',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
-              color: 'var(--accent)',
-              letterSpacing: '0.1em',
-              margin: '0 0 4px',
-              fontWeight: 700,
-            }}
-          >
-            TRAVEL OPTIONS
-          </p>
-          <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-            전국 국내 여행지 랜덤 추천!
-          </p>
-        </div>
-        <div
-          style={{
-            flex: 1,
-            borderRadius: '12px',
-            padding: '12px 14px',
-            background: '#ffffff',
-            border: '1px solid var(--border)',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
-              color: 'var(--text-light)',
-              letterSpacing: '0.1em',
-              margin: '0 0 4px',
-              fontWeight: 700,
-            }}
-          >
-            HOW TO USE
-          </p>
-          <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-            지도 클릭 → 다트 발사 → 여행지 공개
-          </p>
-        </div>
-      </div>
-
       {/* 지도 */}
       <MapPanel
         landed={landed}
@@ -121,10 +72,15 @@ export default function MobileLayout({
         handleLand={handleLand}
         handleReset={handleReset}
         setIsThrown={setIsThrown}
+        filteredDestinations={filteredDestinations}
         padding="12px"
       />
 
-      {/* 센터 모달 */}
+      {/* 지도 아래 InfoPanel */}
+      <div style={{ marginTop: '16px' }}>
+        <InfoPanel onFilterChange={onFilterChange} />
+      </div>
+
       <AnimatePresence>
         {landed && (
           <motion.div

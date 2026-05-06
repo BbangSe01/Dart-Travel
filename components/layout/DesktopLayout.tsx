@@ -15,6 +15,8 @@ interface Props {
   handleLand: (dest: Destination) => void;
   handleReset: () => void;
   setIsThrown: (v: boolean) => void;
+  filteredDestinations: Destination[];
+  onFilterChange: (filter: any) => void;
 }
 
 export default function DesktopLayout({
@@ -26,6 +28,8 @@ export default function DesktopLayout({
   handleLand,
   handleReset,
   setIsThrown,
+  filteredDestinations,
+  onFilterChange,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -78,6 +82,7 @@ export default function DesktopLayout({
           handleLand={handleLand}
           handleReset={handleReset}
           setIsThrown={setIsThrown}
+          filteredDestinations={filteredDestinations}
           padding="16px"
         />
       </div>
@@ -93,7 +98,7 @@ export default function DesktopLayout({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <InfoPanel />
+              <InfoPanel onFilterChange={onFilterChange} />
             </motion.div>
           )}
           {landed && (
