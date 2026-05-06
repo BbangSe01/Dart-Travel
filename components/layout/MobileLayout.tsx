@@ -47,7 +47,7 @@ export default function MobileLayout({
       {/* 헤더 */}
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '28px' }}>🎯</span>
+          <span style={{ fontSize: '28px', paddingBottom: '0.6rem' }}>🎯</span>
           <h1
             style={{
               fontFamily: 'var(--font-display)',

@@ -40,7 +40,7 @@ export default function BlogPreview({ blogs, noBorder = false }: Props) {
           flexShrink: 0,
         }}
       >
-        <span style={{ fontSize: '20px', lineHeight: 1 }}>🗺️</span>
+        <span style={{ fontSize: '20px', paddingBottom: '0.5rem' }}>🗺️</span>
         <h3
           style={{
             fontFamily: 'var(--font-display)',

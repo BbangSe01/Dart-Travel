@@ -46,7 +46,7 @@ export default function TabletLayout({
     <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px' }}>
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-          <span style={{ fontSize: '28px' }}>🎯</span>
+          <span style={{ fontSize: '28px', paddingBottom: '0.6rem' }}>🎯</span>
           <h1
             style={{
               fontFamily: 'var(--font-display)',
