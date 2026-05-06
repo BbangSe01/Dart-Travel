@@ -41,7 +41,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
   const projectionRef = useRef<d3.GeoProjection | null>(null);
   const animFrameRef = useRef<number>(0);
 
-  // 위경도 → SVG 좌표 변환
   function project(lat: number, lng: number): { x: number; y: number } | null {
     if (!projectionRef.current) return null;
     const result = projectionRef.current([lng, lat]);
@@ -49,15 +48,12 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
     return { x: result[0], y: result[1] };
   }
 
-  // GeoJSON 로드
   useEffect(() => {
     fetch('/korea.json')
       .then(r => r.json())
       .then(geoData => {
-        // 한국 전체를 500x600 안에 꽉 차도록 자동으로 스케일과 위치 계산
         const projection = d3.geoMercator().fitSize([WIDTH, HEIGHT], geoData);
         projectionRef.current = projection;
-        // 도/시 17개의 경계 좌표를 SVG path 문자열로 반환
         const pathGen = d3.geoPath().projection(projection);
         const rendered = geoData.features.map((f: any) => ({
           d: pathGen(f) ?? '',
@@ -65,25 +61,23 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
         }));
         setPaths(rendered);
 
-        // 핀 좌표 미리 계산
         const positions = new Map<string, { x: number; y: number }>();
         DESTINATIONS.forEach(dest => {
           const result = projection([dest.lng, dest.lat]);
           if (result) positions.set(dest.name, { x: result[0], y: result[1] });
         });
         setPinPositions(positions);
-        // 지도 렌더링 준비 완료
         setIsReady(true);
       });
   }, []);
 
-  // 다트 착지 후 파동
   const ripplePos = ripple && landed ? (pinPositions.get(landed.name) ?? null) : null;
 
   function handleClick() {
     if (isThrown) return;
 
     const pool = filteredDestinations.length > 0 ? filteredDestinations : DESTINATIONS;
+    console.log('filter', pool);
     const dest = pool[Math.floor(Math.random() * pool.length)];
     const destPos = project(dest.lat, dest.lng);
     if (!destPos) return;
@@ -145,10 +139,8 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
         className={`w-full ${!isThrown ? 'cursor-crosshair' : 'cursor-default'}`}
         onClick={handleClick}
       >
-        {/* 바다 배경 */}
         <rect width={WIDTH} height={HEIGHT} fill="#daeaf5" />
 
-        {/* 그리드 */}
         {[100, 200, 300, 400].map(v => (
           <g key={`grid-${v}`}>
             <line x1={v} y1="0" x2={v} y2={HEIGHT} stroke="rgba(0,0,0,0.03)" strokeWidth="1" />
@@ -156,12 +148,10 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
           </g>
         ))}
 
-        {/* 도 경계 */}
         {paths.map((p, i) => (
           <path key={i} d={p.d} fill="#c8ddb8" stroke="#a8c496" strokeWidth="1" />
         ))}
 
-        {/* 여행지 핀 */}
         {isReady &&
           DESTINATIONS.map(dest => {
             const pos = pinPositions.get(dest.name);
@@ -189,7 +179,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
             );
           })}
 
-        {/* 툴팁 */}
         {tooltip &&
           !isThrown &&
           (() => {
@@ -228,7 +217,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
             );
           })()}
 
-        {/* 다트 잔상 */}
         {trail.map((pt, i) => (
           <circle
             key={pt.id}
@@ -240,7 +228,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
           />
         ))}
 
-        {/* 다트 */}
         {dartPos && (
           <g transform={`translate(${dartPos.x},${dartPos.y}) rotate(${dartAngle})`}>
             <line x1="-18" y1="0" x2="6" y2="0" stroke="#d4a96a" strokeWidth="2.5" strokeLinecap="round" />
@@ -250,7 +237,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
           </g>
         )}
 
-        {/* 착지 파동 */}
         {ripple && ripplePos && (
           <>
             <circle cx={ripplePos.x} cy={ripplePos.y} r="6" fill="none" stroke="#e85d26" strokeWidth="2" opacity="0.8">
@@ -265,7 +251,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
         )}
       </svg>
 
-      {/* 클릭 힌트 */}
       <AnimatePresence>
         {!isThrown && (
           <motion.div

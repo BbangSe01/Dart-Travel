@@ -1,6 +1,7 @@
 'use client';
 import KoreaMap from '@/components/KoreaMap';
 import type { Destination } from '@/components/KoreaMap';
+import { DESTINATIONS } from '@/data/destinations-client';
 
 interface Props {
   landed: Destination | null;
@@ -30,7 +31,7 @@ export default function MapPanel({
       setIsThrown(v);
       if (!v) handleReset();
     },
-    filteredDestinations,
+    filteredDestinations: filteredDestinations ?? DESTINATIONS,
   };
 
   return (

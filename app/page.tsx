@@ -16,6 +16,7 @@ function HomeContent() {
   const [loading, setLoading] = useState(false);
   const [destDetail, setDestDetail] = useState<any>(null);
   const [revealing, setRevealing] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
   const [filter, setFilter] = useState<FilterState>({ seasons: [], themes: [] });
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(max-width: 1100px)');
@@ -25,12 +26,6 @@ function HomeContent() {
     // 계절/테마 단일로는 OR 연산. 계절과 테마는 AND 연산
     const { seasons, themes } = filter;
     if (seasons.length === 0 && themes.length === 0) return DESTINATIONS;
-    const test = DESTINATIONS.filter(d => {
-      const seasonMatch = seasons.length === 0 || seasons.some(s => d.season.includes(s));
-      const themeMatch = themes.length === 0 || themes.some(t => d.theme.includes(t));
-      return seasonMatch && themeMatch;
-    });
-    console.log('test', test);
     return DESTINATIONS.filter(d => {
       const seasonMatch = seasons.length === 0 || seasons.some(s => d.season.includes(s));
       const themeMatch = themes.length === 0 || themes.some(t => d.theme.includes(t));
@@ -90,6 +85,8 @@ function HomeContent() {
     setLoading(false);
     setDestDetail(null);
     setRevealing(false);
+    setFilter({ seasons: [], themes: [] });
+    setResetKey(prev => prev + 1);
     window.history.replaceState({}, '', '/');
   }, []);
 
@@ -104,6 +101,7 @@ function HomeContent() {
     setIsThrown,
     filteredDestinations,
     onFilterChange: setFilter,
+    infoPanelKey: resetKey,
   };
 
   return (

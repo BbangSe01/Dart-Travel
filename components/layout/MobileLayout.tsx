@@ -17,6 +17,7 @@ interface Props {
   setIsThrown: (v: boolean) => void;
   filteredDestinations: Destination[];
   onFilterChange: (filter: any) => void;
+  infoPanelKey: number;
 }
 
 export default function MobileLayout({
@@ -30,6 +31,7 @@ export default function MobileLayout({
   setIsThrown,
   filteredDestinations,
   onFilterChange,
+  infoPanelKey,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -78,7 +80,7 @@ export default function MobileLayout({
 
       {/* 지도 아래 InfoPanel */}
       <div style={{ marginTop: '16px' }}>
-        <InfoPanel onFilterChange={onFilterChange} />
+        <InfoPanel key={infoPanelKey} onFilterChange={onFilterChange} />
       </div>
 
       <AnimatePresence>
