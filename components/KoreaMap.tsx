@@ -77,7 +77,6 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
     if (isThrown) return;
 
     const pool = filteredDestinations.length > 0 ? filteredDestinations : DESTINATIONS;
-    console.log('filter', pool);
     const dest = pool[Math.floor(Math.random() * pool.length)];
     const destPos = project(dest.lat, dest.lng);
     if (!destPos) return;
