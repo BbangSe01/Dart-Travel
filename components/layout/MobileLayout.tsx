@@ -129,7 +129,7 @@ export default function MobileLayout({
                       transition: 'all 0.18s',
                     }}
                   >
-                    {copied ? '✓ 복사됨' : '🔗 링크 복사'}
+                    {copied ? '✓ 결과를 공유해보세요!' : '🔗 링크 복사'}
                   </button>
                   <button
                     onClick={handleReset}

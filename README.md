@@ -15,13 +15,12 @@ SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영�
 - **다트 던지기 애니메이션** — D3.js 기반 정밀 한국 지도 + 베지어 곡선 다트 애니메이션
 - **여행지 상세 정보** — 한국관광공사 공식 사진, 여행지 소개, 꿀팁 제공
 - **여행 맛보기** — 네이버 블로그 검색 API 연동으로 관련 블로그 5개 제공
-- **결과 공유** — URL 파라미터로 결과 고정, 링크 복사로 간편 공유
+- **조건 필터링** — 계절 / 테마별 필터로 사용자 니즈에 맞는 여행지 후보군 설정
 
 ---
 
 ## 🗺️ 개선 예정
 
-- **여행지 조건 필터 기능** — 계절 / 테마별 여행지 filter 기능 추가하여 사용자의 니즈에 맞는 여행지로 후보군을 좁혀주는 옵션 추가
 - **여행지 데이터 merge script 생성** — 데이터와 fetch가 많아짐에 따라 좀 더 효율적으로 데이터를 갱신할 merge script 추가 예정
 
 ---
@@ -51,16 +50,20 @@ dart-travel/
 │       └── destination/route.ts    # 여행지 데이터 API
 ├── components/
 │   ├── layout/
-│   │   ├── MobileLayout.tsx
+│   │   ├── DesktopLayout.tsx
 │   │   ├── TabletLayout.tsx
-│   │   └── DesktopLayout.tsx
+│   │   └── MobileLayout.tsx
 │   ├── panels/
-│   │   ├── MapPanel.tsx            # 지도 + 다시던지기 버튼
-│   │   └── ResultSet.tsx           # CourseCard + 스프링 + BlogPreview
-│   ├── KoreaMap.tsx                # D3.js SVG 지도 + 다트 애니메이션
-│   ├── CourseCard.tsx              # 여행지 정보 카드
-│   ├── BlogPreview.tsx             # 네이버 블로그 미리보기
-│   ├── InfoPanel.tsx               # 안내 패널
+│   │   ├── left/
+│   │   │   ├── KoreaMap.tsx        # D3.js SVG 지도 + 다트 애니메이션
+│   │   │   └── MapPanel.tsx        # 지도 패널
+│   │   └── right/
+│   │       ├── info/
+│   │       │   └── InfoPanel.tsx   # HOW TO USE + 필터 패널
+│   │       └── result/
+│   │           ├── ResultSet.tsx   # CourseCard + 스프링 + BlogPreview
+│   │           ├── CourseCard.tsx  # 여행지 정보 카드
+│   │           └── BlogPreview.tsx # 네이버 블로그 미리보기
 │   └── RevealOverlay.tsx           # 결과 공개 오버레이
 ├── data/
 │   ├── destinations-client.ts      # 클라이언트용 여행지 데이터
@@ -70,6 +73,7 @@ dart-travel/
 ├── public/
 │   └── korea.json                  # 한국 행정구역 GeoJSON
 └── scripts/
+    ├── generate-client.ts          # destinations-client.ts 자동 생성
     ├── fetch-images.ts             # 한국관광공사 이미지 수집
     └── fetch-blogs.ts              # 네이버 블로그 수집
 ```
@@ -96,10 +100,12 @@ NAVER_CLIENT_ID=네이버_클라이언트_아이디
 NAVER_CLIENT_SECRET=네이버_시크릿
 ```
 
-> `destinations.json`은 민감한 데이터가 포함되어 있어 gitignore 처리되어 있습니다.  
-> 아래 스크립트로 직접 수집할 수 있어요.
+여행지 추가 및 관련 데이터 fetch는 아래 스크립트로 직접 수집할 수 있어요.
 
 ```bash
+# destinations-client.ts 자동 생성 (destinations.json 수정 후 실행)
+yarn generate-client
+
 # 한국관광공사 이미지 수집
 yarn fetch-images
 
