@@ -3,12 +3,12 @@ import { useState, useCallback, useEffect, Suspense, useMemo } from 'react'; // 
 import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { DESTINATIONS } from '@/data/destinations-client';
-import type { Destination } from '@/components/KoreaMap';
+import type { Destination } from '@/components/panels/left/KoreaMap';
 import RevealOverlay from '@/components/RevealOverlay';
 import MobileLayout from '@/components/layout/MobileLayout';
 import TabletLayout from '@/components/layout/TabletLayout';
 import DesktopLayout from '@/components/layout/DesktopLayout';
-import { type FilterState } from '@/components/InfoPanel';
+import { type FilterState } from '@/components/panels/right/info/InfoPanel';
 
 function HomeContent() {
   const [isThrown, setIsThrown] = useState(false);
