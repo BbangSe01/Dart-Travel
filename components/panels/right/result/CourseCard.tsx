@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Destination } from './KoreaMap';
+import type { Destination } from '../../left/KoreaMap';
 
 interface DestDetail {
   name: string;

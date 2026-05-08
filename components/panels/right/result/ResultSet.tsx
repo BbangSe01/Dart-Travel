@@ -1,7 +1,7 @@
 'use client';
-import CourseCard from '@/components/CourseCard';
-import BlogPreview from '@/components/BlogPreview';
-import type { Destination } from '@/components/KoreaMap';
+import CourseCard from './CourseCard';
+import BlogPreview from './BlogPreview';
+import type { Destination } from '@/components/panels/left/KoreaMap';
 
 interface Props {
   landed: Destination;

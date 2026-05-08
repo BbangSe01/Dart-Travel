@@ -1,10 +1,10 @@
 'use client';
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MapPanel from '@/components/panels/MapPanel';
-import ResultSet from '@/components/panels/ResultSet';
-import InfoPanel from '@/components/InfoPanel';
-import type { Destination } from '@/components/KoreaMap';
+import MapPanel from '@/components/panels/left/MapPanel';
+import ResultSet from '@/components/panels/right/result/ResultSet';
+import InfoPanel from '@/components/panels/right/info/InfoPanel';
+import type { Destination } from '@/components/panels/left/KoreaMap';
 
 interface Props {
   landed: Destination | null;

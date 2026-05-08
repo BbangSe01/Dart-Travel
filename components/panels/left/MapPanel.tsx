@@ -1,6 +1,6 @@
 'use client';
-import KoreaMap from '@/components/KoreaMap';
-import type { Destination } from '@/components/KoreaMap';
+import KoreaMap from '@/components/panels/left/KoreaMap';
+import type { Destination } from '@/components/panels/left/KoreaMap';
 import { DESTINATIONS } from '@/data/destinations-client';
 
 interface Props {
