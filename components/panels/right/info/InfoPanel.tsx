@@ -170,7 +170,7 @@ export default function InfoPanel({ onFilterChange }: Props) {
           <>
             {/* 계절 */}
             <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', marginLeft: '2px' }}>계절</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '16px' }}>
               {SEASONS.map(s => (
                 <button
                   key={s}
@@ -185,7 +185,7 @@ export default function InfoPanel({ onFilterChange }: Props) {
 
             {/* 테마 */}
             <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', marginLeft: '2px' }}>테마</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
               {THEMES.map(t => (
                 <button
                   key={t}
