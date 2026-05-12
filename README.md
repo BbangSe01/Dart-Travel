@@ -11,17 +11,11 @@ SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영�
 
 ## ✨ 주요 기능
 
-- **랜덤 여행지 추천** — 전국 여행지 중 랜덤 선택 (여행지는 추가적으로 계속 업데이트)
+- **랜덤 여행지 추천** — 전국 여행지 중 랜덤 선택 (여행지는 지속적으로 업데이트)
 - **다트 던지기 애니메이션** — D3.js 기반 정밀 한국 지도 + 베지어 곡선 다트 애니메이션
 - **여행지 상세 정보** — 한국관광공사 공식 사진, 여행지 소개, 꿀팁 제공
 - **여행 맛보기** — 네이버 블로그 검색 API 연동으로 관련 블로그 5개 제공
 - **조건 필터링** — 계절 / 테마별 필터로 사용자 니즈에 맞는 여행지 후보군 설정
-
----
-
-## 🗺️ 개선 예정
-
-- **여행지 데이터 merge script 생성** — 데이터와 fetch가 많아짐에 따라 좀 더 효율적으로 데이터를 갱신할 merge script 추가 예정
 
 ---
 
@@ -43,11 +37,11 @@ SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영�
 ```
 dart-travel/
 ├── app/
-│   ├── page.tsx                    # 메인 페이지 (state 관리)
-│   ├── layout.tsx                  # 메타데이터 + OG 태그
+│   ├── page.tsx                         # 메인 페이지 (state 관리)
+│   ├── layout.tsx                        # 메타데이터 + OG 태그
 │   ├── globals.css
 │   └── api/
-│       └── destination/route.ts    # 여행지 데이터 API
+│       └── destination/route.ts          # 여행지 데이터 API
 ├── components/
 │   ├── layout/
 │   │   ├── DesktopLayout.tsx
@@ -55,27 +49,25 @@ dart-travel/
 │   │   └── MobileLayout.tsx
 │   ├── panels/
 │   │   ├── left/
-│   │   │   ├── KoreaMap.tsx        # D3.js SVG 지도 + 다트 애니메이션
-│   │   │   └── MapPanel.tsx        # 지도 패널
+│   │   │   ├── KoreaMap.tsx             # D3.js SVG 지도 + 다트 애니메이션
+│   │   │   └── MapPanel.tsx             # 지도 패널
 │   │   └── right/
 │   │       ├── info/
-│   │       │   └── InfoPanel.tsx   # HOW TO USE + 필터 패널
+│   │       │   └── InfoPanel.tsx        # HOW TO USE + 필터 패널
 │   │       └── result/
-│   │           ├── ResultSet.tsx   # CourseCard + 스프링 + BlogPreview
-│   │           ├── CourseCard.tsx  # 여행지 정보 카드
-│   │           └── BlogPreview.tsx # 네이버 블로그 미리보기
-│   └── RevealOverlay.tsx           # 결과 공개 오버레이
+│   │           ├── ResultSet.tsx        # CourseCard + 스프링 + BlogPreview
+│   │           ├── CourseCard.tsx       # 여행지 정보 카드
+│   │           └── BlogPreview.tsx      # 네이버 블로그 미리보기
+│   └── RevealOverlay.tsx                # 결과 공개 오버레이
 ├── data/
-│   ├── destinations-client.ts      # 클라이언트용 여행지 데이터
-│   └── destinations.json           # 서버 전용 상세 데이터 (gitignore)
+│   ├── destinations-client.ts           # 클라이언트용 여행지 데이터
+│   └── destinations.json                # 서버 전용 상세 데이터 (gitignore)
 ├── hooks/
-│   └── useMediaQuery.ts            # 반응형 분기 hook
+│   └── useMediaQuery.ts                 # 반응형 분기 hook
 ├── public/
-│   └── korea.json                  # 한국 행정구역 GeoJSON
+│   └── korea.json                       # 한국 행정구역 GeoJSON
 └── scripts/
-    ├── generate-client.ts          # destinations-client.ts 자동 생성
-    ├── fetch-images.ts             # 한국관광공사 이미지 수집
-    └── fetch-blogs.ts              # 네이버 블로그 수집
+    └── update-destinations.ts           # 데이터 업데이트 스크립트
 ```
 
 ---
@@ -100,17 +92,51 @@ NAVER_CLIENT_ID=네이버_클라이언트_아이디
 NAVER_CLIENT_SECRET=네이버_시크릿
 ```
 
-여행지 추가 및 관련 데이터 fetch는 아래 스크립트로 직접 수집할 수 있어요.
+---
+
+## 📊 데이터 업데이트
+
+여행지 추가 및 데이터 수집은 `update-destinations.ts` 스크립트로 처리해요.
+
+### 실행 전 준비
+
+`data/new-destinations.json`을 생성하고 추가할 여행지를 작성하세요.
+
+```json
+[
+  {
+    "name": "서울 광장시장",
+    "tag": "전통시장 + 먹거리",
+    "emoji": "🥘",
+    "lat": 37.57,
+    "lng": 126.99,
+    "season": ["봄", "여름", "가을", "겨울"],
+    "theme": ["맛집", "역사", "도시"],
+    "reason": "여행지 소개",
+    "tip": "여행 팁",
+    "images": [],
+    "blogs": []
+  }
+]
+```
+
+### 스크립트 실행 순서
+
+스크립트는 아래 4단계를 순차적으로 실행해요.
+
+```
+1. destinations.json에 새 여행지 병합
+2. 한국관광공사 API로 이미지 수집
+3. 네이버 블로그 API로 블로그 데이터 수집
+4. destinations-client.ts 자동 재생성
+```
 
 ```bash
-# destinations-client.ts 자동 생성 (destinations.json 수정 후 실행)
-yarn generate-client
+# 새로 추가한 여행지만 업데이트
+yarn update-destinations
 
-# 한국관광공사 이미지 수집
-yarn fetch-images
-
-# 네이버 블로그 수집
-yarn fetch-blogs
+# 전체 여행지 데이터 최신화
+yarn update-destinations:all
 ```
 
 ---
