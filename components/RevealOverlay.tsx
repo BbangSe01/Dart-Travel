@@ -5,6 +5,8 @@ interface Props {
   revealing: boolean;
 }
 
+const TEXT = '과연 그대의 목적지는..?';
+
 export default function RevealOverlay({ revealing }: Props) {
   return (
     <AnimatePresence>
@@ -27,10 +29,7 @@ export default function RevealOverlay({ revealing }: Props) {
             gap: '24px',
           }}
         >
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+          <p
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(24px, 4vw, 40px)',
@@ -39,14 +38,32 @@ export default function RevealOverlay({ revealing }: Props) {
               letterSpacing: '-0.02em',
               textAlign: 'center',
               padding: '0 24px',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
           >
-            과연 그대의 목적지는..?
-          </motion.p>
+            {TEXT.split('').map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.2 + i * 0.06,
+                  duration: 0.3,
+                  ease: 'easeOut',
+                }}
+                style={{ whiteSpace: 'pre' }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </p>
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.2 + TEXT.length * 0.06 + 0.2 }}
             style={{ display: 'flex', gap: '10px' }}
           >
             {[0, 1, 2].map(i => (

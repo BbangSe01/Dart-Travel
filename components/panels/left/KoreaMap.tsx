@@ -40,6 +40,7 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
 
   const projectionRef = useRef<d3.GeoProjection | null>(null);
   const animFrameRef = useRef<number>(0);
+  const vibrateRef = useRef<NodeJS.Timeout | null>(null);
 
   function project(lat: number, lng: number): { x: number; y: number } | null {
     if (!projectionRef.current) return null;
@@ -76,6 +77,11 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
   function handleClick() {
     if (isThrown) return;
 
+    if (vibrateRef.current) {
+      clearTimeout(vibrateRef.current);
+      vibrateRef.current = null;
+    }
+
     const pool = filteredDestinations.length > 0 ? filteredDestinations : DESTINATIONS;
     const dest = pool[Math.floor(Math.random() * pool.length)];
     const destPos = project(dest.lat, dest.lng);
@@ -93,7 +99,7 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
     const ctrlX = (startX + endX) / 2 - 40;
     const ctrlY = Math.min(startY, endY) - 80;
 
-    const duration = 650;
+    const duration = 1250;
     const startTime = performance.now();
 
     const animate = (now: number) => {
@@ -117,11 +123,25 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
       if (t < 1) {
         animFrameRef.current = requestAnimationFrame(animate);
       } else {
+        // 착지 순간 진동 이펙트
         setDartPos({ x: endX, y: endY });
-        setDartAngle(-90);
         setTrail([]);
         setRipple(true);
         setTimeout(() => setRipple(false), 800);
+
+        // 각도 진동: -90을 기준으로 좌우로 흔들다가 수렴
+        const vibrate = (count: number, maxAngle: number) => {
+          if (count === 0) {
+            setDartAngle(-90);
+            return;
+          }
+          const angle = count % 2 === 0 ? -90 + maxAngle : -90 - maxAngle;
+          setDartAngle(angle);
+          vibrateRef.current = setTimeout(() => vibrate(count - 1, maxAngle * 0.6), 50);
+        };
+
+        vibrate(10, 20);
+
         setLanded(dest);
         onLand(dest);
       }
@@ -229,10 +249,10 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
 
         {dartPos && (
           <g transform={`translate(${dartPos.x},${dartPos.y}) rotate(${dartAngle})`}>
-            <line x1="-18" y1="0" x2="6" y2="0" stroke="#d4a96a" strokeWidth="2.5" strokeLinecap="round" />
-            <polygon points="6,0 0,-2.5 0,2.5" fill="#c8a876" />
-            <path d="M-18,0 L-13,-7 L-11,0Z" fill="#e85d26" opacity="0.9" />
-            <path d="M-18,0 L-13,7 L-11,0Z" fill="#f97316" opacity="0.9" />
+            <line x1="-26" y1="0" x2="8" y2="0" stroke="#d4a96a" strokeWidth="3.5" strokeLinecap="round" />
+            <polygon points="8,0 0,-3.5 0,3.5" fill="#c8a876" />
+            <path d="M-26,0 L-18,-10 L-15,0Z" fill="#e85d26" opacity="0.9" />
+            <path d="M-26,0 L-18,10 L-15,0Z" fill="#f97316" opacity="0.9" />
           </g>
         )}
 

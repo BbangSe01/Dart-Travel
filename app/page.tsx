@@ -60,23 +60,26 @@ function HomeContent() {
   }, [searchParams]);
 
   const handleLand = useCallback(async (dest: Destination) => {
-    setRevealing(true);
-
     const fetchPromise = fetch(`/api/destination?name=${encodeURIComponent(dest.name)}`)
       .then(res => res.json())
       .catch(() => null);
 
-    setTimeout(async () => {
-      setRevealing(false);
-      setLanded(dest);
-      setLoading(true);
-      try {
-        const data = await fetchPromise;
-        setDestDetail(data);
-      } finally {
-        setLoading(false);
-      }
-    }, 3000);
+    // 다트 착지 후 진동 애니메이션 0.5초 설정
+    setTimeout(() => {
+      setRevealing(true);
+
+      setTimeout(async () => {
+        setRevealing(false);
+        setLanded(dest);
+        setLoading(true);
+        try {
+          const data = await fetchPromise;
+          setDestDetail(data);
+        } finally {
+          setLoading(false);
+        }
+      }, 3000);
+    }, 500);
   }, []);
 
   const handleReset = useCallback(() => {
