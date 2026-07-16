@@ -4,8 +4,7 @@
 
 **[→ 서비스 바로가기](https://dart-travel.vercel.app)**
 
-SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영감을 받아 만든 서비스예요.  
-실제 다트나 지도 없이도 랜덤 국내 여행을 떠날 수 있어요.
+SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영감을 받아 만든 서비스입니다.
 
 ---
 
@@ -27,116 +26,37 @@ SNS에서 유행하는 "다트로 지도 찍어 여행지 정하기"에서 영�
 | Language   | TypeScript                             |
 | Animation  | Framer Motion                          |
 | Map        | D3.js + GeoJSON                        |
+| Database   | Supabase (Postgres) (도입 예정)        |
 | API        | 한국관광공사 Tour API, 네이버 검색 API |
-| Deployment | Vercel                                 |
+| Deployment | Vercel (+ Vercel Cron)                 |
 
----
+## 🧭 향후 개발 방향
 
-## 📁 프로젝트 구조
+![최근 접속자 수](./app/assets/images/recentoverview.png)
+(2026-07-16)<br/>
+사실 하루에 소소하게 5명만 들어와도 성공이라고 생각한 사이드 프로젝트였는데 어느날 확인해보니 방문수가 제 예상을 뛰어넘었습니다..<br/>Develop 하고 싶은 부분들이 꽤나 있었지만 이용자가 없다면 큰 의미가 없다고 판단하여 멈추었었는데, 조금이지만 이용자가 있음을 확인하고 나니 용기가 생겨서 추가 개발을 해보려고 합니다..!
+<br/>
+(개발자로 취업을 하긴 했지만 제가 직접 실제 서비스를 배포한건 이게 처음이라 감회가 매우 새롭습니다,,)
 
-```
-dart-travel/
-├── app/
-│   ├── page.tsx                         # 메인 페이지 (state 관리)
-│   ├── layout.tsx                        # 메타데이터 + OG 태그
-│   ├── globals.css
-│   └── api/
-│       └── destination/route.ts          # 여행지 데이터 API
-├── components/
-│   ├── layout/
-│   │   ├── DesktopLayout.tsx
-│   │   ├── TabletLayout.tsx
-│   │   └── MobileLayout.tsx
-│   ├── panels/
-│   │   ├── left/
-│   │   │   ├── KoreaMap.tsx             # D3.js SVG 지도 + 다트 애니메이션
-│   │   │   └── MapPanel.tsx             # 지도 패널
-│   │   └── right/
-│   │       ├── info/
-│   │       │   └── InfoPanel.tsx        # HOW TO USE + 필터 패널
-│   │       └── result/
-│   │           ├── ResultSet.tsx        # CourseCard + 스프링 + BlogPreview
-│   │           ├── CourseCard.tsx       # 여행지 정보 카드
-│   │           └── BlogPreview.tsx      # 네이버 블로그 미리보기
-│   └── RevealOverlay.tsx                # 결과 공개 오버레이
-├── data/
-│   ├── destinations-client.ts           # 클라이언트용 여행지 데이터
-│   └── destinations.json                # 서버 전용 상세 데이터 (gitignore)
-├── hooks/
-│   └── useMediaQuery.ts                 # 반응형 분기 hook
-├── public/
-│   └── korea.json                       # 한국 행정구역 GeoJSON
-└── scripts/
-    └── update-destinations.ts           # 데이터 업데이트 스크립트
-```
+### 1. 서버 + DB 구축
 
----
+기존에는 여행지 데이터를 script 명령어를 통해 JSON 파일에 수동적으로 입력시키는 구조여서, 여행지를 추가하거나 필터 기준 변경 시마다 코드 수정과 재배포가 필요했습니다. 이 구조를 Supabase 기반 DB로 이전해 다음을 해결하려고 해요.
 
-## 🚀 로컬 실행
+- 여행지 추가/수정 시 **재배포 없이 즉시 반영** (기존엔 JSON 파일 수정 → git commit → 재배포가 필요했지만, DB로 이전하면 row 추가만으로 반영됨)
+- 필터(테마, 계절) 기준을 테이블화하여 새 기준 추가를 유연하게 처리
+- 한국관광공사/네이버 API 데이터를 **DB + Vercel Cron**으로 주기적 자동 갱신 (가능한지 좀 더 체크해보아야 함)
 
-```bash
-# 패키지 설치
-yarn install
+### 2. 공유/바이럴 강화
 
-# 개발 서버 실행
-yarn dev
-```
+현재 결과 URL을 쿼리 파라미터로 공유할 수 있는 구조를 갖추고 있고, 실제로 홍보 없이 인스타그램·페이스북을 통한 자발적 유입이 확인됐습니다. 이 흐름을 강화하기 위해 아래를 계획하고 있어요.
 
-### 환경 변수 설정
+- 결과 페이지 OG 태그를 여행지별로 동적 생성 (공유 시 미리보기에 실제 뽑힌 여행지가 노출되도록)
+- 카카오톡/인스타 스토리 원클릭 공유 버튼 추가
+- "이번 주 가장 많이 뽑힌 여행지" 등 누적 데이터 기반 통계 페이지
 
-`.env` 파일을 생성하고 아래 값을 입력하세요.
+### 3. 사용자 경험 개선 및 서비스 대상 확대
 
-```env
-TOUR_API_KEY=한국관광공사_인증키
-NAVER_CLIENT_ID=네이버_클라이언트_아이디
-NAVER_CLIENT_SECRET=네이버_시크릿
-```
+사용자 유입이 늘어나면서 UX/UI적인 부분에 좀 더 신경을 쓸 생각입니다. 또한 서비스가 안정적이게 구축이 되면, 이 서비스가 외국인에게도 도움이 될 수 있도록 추가 개발을 생각중입니다.
 
----
-
-## 📊 데이터 업데이트
-
-여행지 추가 및 데이터 수집은 `update-destinations.ts` 스크립트로 처리해요.
-
-### 실행 전 준비
-
-`data/new-destinations.json`을 생성하고 추가할 여행지를 작성하세요.
-
-```json
-[
-  {
-    "name": "서울 광장시장",
-    "tag": "전통시장 + 먹거리",
-    "emoji": "🥘",
-    "lat": 37.57,
-    "lng": 126.99,
-    "season": ["봄", "여름", "가을", "겨울"],
-    "theme": ["맛집", "역사", "도시"],
-    "reason": "여행지 소개",
-    "tip": "여행 팁",
-    "images": [],
-    "blogs": []
-  }
-]
-```
-
-### 스크립트 실행 순서
-
-스크립트는 아래 4단계를 순차적으로 실행해요.
-
-```
-1. destinations.json에 새 여행지 병합
-2. 한국관광공사 API로 이미지 수집
-3. 네이버 블로그 API로 블로그 데이터 수집
-4. destinations-client.ts 자동 재생성
-```
-
-```bash
-# 새로 추가한 여행지만 업데이트
-yarn update-destinations
-
-# 전체 여행지 데이터 최신화
-yarn update-destinations:all
-```
-
----
+- 다트 결과 화면, 필터 인터랙션 등 UX 디테일 개선 (로딩/전환 애니메이션, 모바일 반응형 다듬기 등)
+- 관광객을 위한 좀 더 라이트한 관광지 추천 + 언어 지원
