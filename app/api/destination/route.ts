@@ -1,21 +1,25 @@
-import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { NextRequest, NextResponse } from 'next/server';
+import { getDestinationByName, getRandomDestination } from '@/lib/destinations';
 
 export async function GET(req: NextRequest) {
-  const filePath = path.join(process.cwd(), "data", "destinations.json");
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const destinations = JSON.parse(raw);
-
-  const name = req.nextUrl.searchParams.get("name");
+  const name = req.nextUrl.searchParams.get('name');
 
   if (name) {
-    const found = destinations.find((d: any) => d.name === name);
-    if (!found) return NextResponse.json({ error: "Not found" }, { status: 404 });
-    return NextResponse.json(found);
+    try {
+      const result = await getDestinationByName(name);
+      if (!result) {
+        return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      }
+      return NextResponse.json(result);
+    } catch (err) {
+      return NextResponse.json({ error: '서버 오류' }, { status: 500 });
+    }
   }
 
-  // name 없으면 랜덤
-  const picked = destinations[Math.floor(Math.random() * destinations.length)];
-  return NextResponse.json(picked);
+  try {
+    const result = await getRandomDestination();
+    return NextResponse.json(result);
+  } catch (err) {
+    return NextResponse.json({ error: '서버 오류' }, { status: 500 });
+  }
 }

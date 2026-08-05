@@ -2,9 +2,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as d3 from 'd3';
-import { DESTINATIONS, type Destination } from '@/data/destinations-client';
-
-export type { Destination };
+import type { Destination } from '@/lib/destinations';
 
 interface DartPos {
   x: number;
@@ -21,12 +19,21 @@ interface Props {
   isThrown: boolean;
   setIsThrown: (v: boolean) => void;
   filteredDestinations: Destination[];
+  allDestinations: Destination[];
+  onReady?: () => void;
 }
 
 const WIDTH = 500;
 const HEIGHT = 600;
 
-export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestinations }: Props) {
+export default function KoreaMap({
+  onLand,
+  isThrown,
+  setIsThrown,
+  filteredDestinations,
+  allDestinations,
+  onReady,
+}: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [dartPos, setDartPos] = useState<DartPos | null>(null);
   const [dartAngle, setDartAngle] = useState(0);
@@ -63,14 +70,15 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
         setPaths(rendered);
 
         const positions = new Map<string, { x: number; y: number }>();
-        DESTINATIONS.forEach(dest => {
+        allDestinations.forEach(dest => {
           const result = projection([dest.lng, dest.lat]);
           if (result) positions.set(dest.name, { x: result[0], y: result[1] });
         });
         setPinPositions(positions);
         setIsReady(true);
+        onReady?.();
       });
-  }, []);
+  }, [allDestinations, onReady]);
 
   const ripplePos = ripple && landed ? (pinPositions.get(landed.name) ?? null) : null;
 
@@ -82,7 +90,7 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
       vibrateRef.current = null;
     }
 
-    const pool = filteredDestinations.length > 0 ? filteredDestinations : DESTINATIONS;
+    const pool = filteredDestinations.length > 0 ? filteredDestinations : allDestinations;
     const dest = pool[Math.floor(Math.random() * pool.length)];
     const destPos = project(dest.lat, dest.lng);
     if (!destPos) return;
@@ -172,7 +180,7 @@ export default function KoreaMap({ onLand, isThrown, setIsThrown, filteredDestin
         ))}
 
         {isReady &&
-          DESTINATIONS.map(dest => {
+          allDestinations.map(dest => {
             const pos = pinPositions.get(dest.name);
             if (!pos) return null;
             const isLanded = landed?.name === dest.name;

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
-import type { Destination } from '@/components/panels/left/KoreaMap';
+import type { Destination } from '@/lib/destinations';
 
 interface Props {
   landed: Destination | null;
@@ -16,6 +16,11 @@ interface Props {
   handleReset: () => void;
   setIsThrown: (v: boolean) => void;
   filteredDestinations: Destination[];
+  allDestinations: Destination[];
+  destinationsLoading: boolean;
+  mapReady: boolean;
+  onMapReady: () => void;
+  isRestoringFromUrl: boolean;
   onFilterChange: (filter: any) => void;
 }
 
@@ -29,6 +34,11 @@ export default function DesktopLayout({
   handleReset,
   setIsThrown,
   filteredDestinations,
+  allDestinations,
+  destinationsLoading,
+  mapReady,
+  onMapReady,
+  isRestoringFromUrl,
   onFilterChange,
 }: Props) {
   const [copied, setCopied] = useState(false);
@@ -83,6 +93,9 @@ export default function DesktopLayout({
           handleReset={handleReset}
           setIsThrown={setIsThrown}
           filteredDestinations={filteredDestinations}
+          allDestinations={allDestinations}
+          destinationsLoading={destinationsLoading}
+          onMapReady={onMapReady}
           padding="16px"
         />
       </div>
@@ -90,7 +103,7 @@ export default function DesktopLayout({
       {/* Col 2: InfoPanel or ResultSet */}
       <div style={{ paddingTop: '84px' }}>
         <AnimatePresence mode="wait">
-          {!landed && !revealing && (
+          {!landed && !revealing && !isRestoringFromUrl && (
             <motion.div
               key="intro"
               initial={{ opacity: 0, y: 12 }}
@@ -101,7 +114,7 @@ export default function DesktopLayout({
               <InfoPanel onFilterChange={onFilterChange} />
             </motion.div>
           )}
-          {landed && (
+          {landed && mapReady && (
             <motion.div
               key="landed"
               initial={{ opacity: 0, y: 12 }}

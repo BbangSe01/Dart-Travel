@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
-import type { Destination } from '@/components/panels/left/KoreaMap';
+import type { Destination } from '@/lib/destinations';
 
 interface Props {
   landed: Destination | null;
@@ -16,6 +16,10 @@ interface Props {
   handleReset: () => void;
   setIsThrown: (v: boolean) => void;
   filteredDestinations: Destination[];
+  allDestinations: Destination[];
+  destinationsLoading: boolean;
+  mapReady: boolean;
+  onMapReady: () => void;
   onFilterChange: (filter: any) => void;
   infoPanelKey: number;
 }
@@ -30,6 +34,10 @@ export default function MobileLayout({
   handleReset,
   setIsThrown,
   filteredDestinations,
+  allDestinations,
+  destinationsLoading,
+  mapReady,
+  onMapReady,
   onFilterChange,
   infoPanelKey,
 }: Props) {
@@ -75,6 +83,9 @@ export default function MobileLayout({
         handleReset={handleReset}
         setIsThrown={setIsThrown}
         filteredDestinations={filteredDestinations}
+        allDestinations={allDestinations}
+        destinationsLoading={destinationsLoading}
+        onMapReady={onMapReady}
         padding="12px"
       />
 
@@ -84,7 +95,7 @@ export default function MobileLayout({
       </div>
 
       <AnimatePresence>
-        {landed && (
+        {landed && mapReady && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
