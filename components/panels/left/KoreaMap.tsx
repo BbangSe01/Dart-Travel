@@ -20,7 +20,6 @@ interface Props {
   setIsThrown: (v: boolean) => void;
   filteredDestinations: Destination[];
   allDestinations: Destination[];
-  onReady?: () => void;
 }
 
 const WIDTH = 500;
@@ -32,7 +31,6 @@ export default function KoreaMap({
   setIsThrown,
   filteredDestinations,
   allDestinations,
-  onReady,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [dartPos, setDartPos] = useState<DartPos | null>(null);
@@ -76,9 +74,8 @@ export default function KoreaMap({
         });
         setPinPositions(positions);
         setIsReady(true);
-        onReady?.();
       });
-  }, [allDestinations, onReady]);
+  }, [allDestinations]);
 
   const ripplePos = ripple && landed ? (pinPositions.get(landed.name) ?? null) : null;
 

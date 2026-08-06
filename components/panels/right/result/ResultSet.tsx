@@ -43,30 +43,55 @@ export default function ResultSet({ landed, destDetail, loading, isMobile = fals
       {/* 스프링 고리 */}
       <div
         style={{
-          width: '28px',
+          width: '30px',
           flexShrink: 0,
-          background: '#e8e4de',
-          borderLeft: '1px solid var(--border)',
-          borderRight: '1px solid var(--border)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          padding: '16px 0',
+          position: 'relative',
+          background: 'linear-gradient(90deg, #d9d3c7 0%, #efece5 22%, #efece5 78%, #d9d3c7 100%)',
+          boxShadow: 'inset 3px 0 6px -3px rgba(0,0,0,0.18), inset -3px 0 6px -3px rgba(0,0,0,0.18)',
         }}
       >
-        {Array.from({ length: 7 }).map((_, i) => (
-          <div
-            key={i}
-            style={{
-              width: '14px',
-              height: '14px',
-              borderRadius: '50%',
-              border: '2px solid var(--border)',
-              background: '#ffffff',
-            }}
-          />
-        ))}
+        {/* 고리를 관통하는 와이어 */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '18px',
+            bottom: '18px',
+            left: '50%',
+            width: '2px',
+            transform: 'translateX(-50%)',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.16), rgba(0,0,0,0.05))',
+            borderRadius: '2px',
+          }}
+        />
+
+        <div
+          style={{
+            position: 'relative',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+            padding: '18px 0',
+          }}
+        >
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: '20px',
+                height: '13px',
+                borderRadius: '50%',
+                border: '3px solid transparent',
+                backgroundImage:
+                  'linear-gradient(#ffffff, #ffffff), linear-gradient(155deg, #f5f3ed 0%, #d3cdc0 45%, #948e80 75%, #58544c 100%)',
+                backgroundOrigin: 'border-box',
+                backgroundClip: 'padding-box, border-box',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.18), inset 0 1px 1px rgba(255,255,255,0.8)',
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* BlogPreview */}

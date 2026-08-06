@@ -20,15 +20,12 @@ function HomeContent() {
   const [allDestinations, setAllDestinations] = useState<Destination[]>([]);
   const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([]);
   const [destinationsLoading, setDestinationsLoading] = useState(true);
-  const [mapReady, setMapReady] = useState(false);
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(max-width: 1100px)');
   const searchParams = useSearchParams();
 
   // ?dest= 링크로 들어와서 아직 착지 데이터를 못 받은 상태 — 이 동안은 인트로 패널을 보여주지 않음
   const isRestoringFromUrl = !!searchParams.get('dest') && !landed;
-
-  const handleMapReady = useCallback(() => setMapReady(true), []);
 
   // 지도 핀 등 필터와 무관하게 항상 필요한 전체 목록 — 마운트 시 한 번만 조회
   useEffect(() => {
@@ -109,8 +106,6 @@ function HomeContent() {
     filteredDestinations,
     allDestinations,
     destinationsLoading,
-    mapReady,
-    onMapReady: handleMapReady,
     isRestoringFromUrl,
     onFilterChange: setFilter,
     infoPanelKey: resetKey,

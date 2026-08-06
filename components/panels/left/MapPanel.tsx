@@ -13,7 +13,6 @@ interface Props {
   filteredDestinations: Destination[];
   allDestinations: Destination[];
   destinationsLoading: boolean;
-  onMapReady?: () => void;
   padding?: string;
 }
 
@@ -27,7 +26,6 @@ export default function MapPanel({
   filteredDestinations,
   allDestinations,
   destinationsLoading,
-  onMapReady,
   padding = '16px',
 }: Props) {
   const mapProps = {
@@ -39,7 +37,6 @@ export default function MapPanel({
     },
     filteredDestinations,
     allDestinations,
-    onReady: onMapReady,
   };
 
   return (

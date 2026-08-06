@@ -18,8 +18,6 @@ interface Props {
   filteredDestinations: Destination[];
   allDestinations: Destination[];
   destinationsLoading: boolean;
-  mapReady: boolean;
-  onMapReady: () => void;
   isRestoringFromUrl: boolean;
   onFilterChange: (filter: any) => void;
 }
@@ -36,8 +34,6 @@ export default function DesktopLayout({
   filteredDestinations,
   allDestinations,
   destinationsLoading,
-  mapReady,
-  onMapReady,
   isRestoringFromUrl,
   onFilterChange,
 }: Props) {
@@ -95,7 +91,6 @@ export default function DesktopLayout({
           filteredDestinations={filteredDestinations}
           allDestinations={allDestinations}
           destinationsLoading={destinationsLoading}
-          onMapReady={onMapReady}
           padding="16px"
         />
       </div>
@@ -114,7 +109,7 @@ export default function DesktopLayout({
               <InfoPanel onFilterChange={onFilterChange} />
             </motion.div>
           )}
-          {landed && mapReady && (
+          {landed && (
             <motion.div
               key="landed"
               initial={{ opacity: 0, y: 12 }}

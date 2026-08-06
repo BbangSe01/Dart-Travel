@@ -18,8 +18,6 @@ interface Props {
   filteredDestinations: Destination[];
   allDestinations: Destination[];
   destinationsLoading: boolean;
-  mapReady: boolean;
-  onMapReady: () => void;
   onFilterChange: (filter: any) => void;
   infoPanelKey: number;
 }
@@ -36,8 +34,6 @@ export default function MobileLayout({
   filteredDestinations,
   allDestinations,
   destinationsLoading,
-  mapReady,
-  onMapReady,
   onFilterChange,
   infoPanelKey,
 }: Props) {
@@ -85,7 +81,6 @@ export default function MobileLayout({
         filteredDestinations={filteredDestinations}
         allDestinations={allDestinations}
         destinationsLoading={destinationsLoading}
-        onMapReady={onMapReady}
         padding="12px"
       />
 
@@ -95,7 +90,7 @@ export default function MobileLayout({
       </div>
 
       <AnimatePresence>
-        {landed && mapReady && (
+        {landed && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
