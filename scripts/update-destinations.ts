@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { supabaseAdmin } from './supabase-admin';
 
 // .env 파싱
 const envPath = path.resolve(process.cwd(), '.env');
@@ -13,22 +14,27 @@ const CLIENT_ID = process.env.NAVER_CLIENT_ID;
 const CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET;
 const SERVICE_KEY = process.env.TOUR_API_KEY;
 
-const destPath = path.join(process.cwd(), 'data', 'destinations.json');
 const newPath = path.join(process.cwd(), 'data', 'new-destinations.json');
-const clientPath = path.join(process.cwd(), 'data', 'destinations-client.ts');
 
 const isAll = process.argv.includes('--all');
 
+interface DestinationRow {
+  id: string;
+  name: string;
+  images: string[];
+  blogs: any[];
+  [key: string]: any;
+}
+
 // ─── Step 1. Merge ───────────────────────────────────────────
-function merge() {
-  console.log('\n📦 [1/4] 여행지 병합 시작');
+async function merge() {
+  console.log('\n📦 [1/3] 여행지 병합 시작');
 
   if (!fs.existsSync(newPath)) {
     console.log('  data/new-destinations.json 없음 → 스킵');
     return;
   }
 
-  const existing: any[] = JSON.parse(fs.readFileSync(destPath, 'utf-8'));
   const newItems: any[] = JSON.parse(fs.readFileSync(newPath, 'utf-8'));
 
   if (newItems.length === 0) {
@@ -36,8 +42,15 @@ function merge() {
     return;
   }
 
-  const existingNames = new Set(existing.map((d: any) => d.name));
-  let addedCount = 0;
+  const { data: existing, error: fetchError } = await supabaseAdmin.from('destinations').select('name');
+  if (fetchError) {
+    console.error('  ❌ 기존 목록 조회 실패:', fetchError.message);
+    return;
+  }
+
+  const existingNames = new Set((existing ?? []).map((d: any) => d.name));
+  const required = ['name', 'tag', 'emoji', 'lat', 'lng', 'season', 'theme'];
+  const toInsert: any[] = [];
   let skippedCount = 0;
 
   for (const item of newItems) {
@@ -47,7 +60,6 @@ function merge() {
       continue;
     }
 
-    const required = ['name', 'tag', 'emoji', 'lat', 'lng', 'season', 'theme'];
     const missing = required.filter(k => !(k in item));
     if (missing.length > 0) {
       console.warn(`  ⚠️  필수 필드 누락 스킵: ${item.name} (${missing.join(', ')})`);
@@ -55,29 +67,41 @@ function merge() {
       continue;
     }
 
-    item.images = item.images ?? [];
-    item.blogs = item.blogs ?? [];
-    existing.push(item);
+    toInsert.push({ ...item, images: item.images ?? [], blogs: item.blogs ?? [] });
     existingNames.add(item.name);
-    addedCount++;
-    console.log(`  ✅ 추가: ${item.name}`);
   }
 
-  fs.writeFileSync(destPath, JSON.stringify(existing, null, 2), 'utf-8');
-  console.log(`  완료: 추가 ${addedCount}개 / 스킵 ${skippedCount}개 / 총 ${existing.length}개`);
+  if (toInsert.length === 0) {
+    console.log(`  완료: 추가 0개 / 스킵 ${skippedCount}개`);
+    return;
+  }
+
+  const { error: insertError } = await supabaseAdmin.from('destinations').insert(toInsert);
+  if (insertError) {
+    console.error('  ❌ insert 실패:', insertError.message);
+    return;
+  }
+
+  toInsert.forEach(item => console.log(`  ✅ 추가: ${item.name}`));
+  console.log(`  완료: 추가 ${toInsert.length}개 / 스킵 ${skippedCount}개`);
 }
 
 // ─── Step 2. Fetch Images ────────────────────────────────────
 async function fetchImages() {
-  console.log(`\n🖼️  [2/4] 이미지 수집 시작 ${isAll ? '(전체)' : '(신규만)'}`);
+  console.log(`\n🖼️  [2/3] 이미지 수집 시작 ${isAll ? '(전체)' : '(신규만)'}`);
 
   if (!SERVICE_KEY) {
     console.error('  ❌ TOUR_API_KEY 없음 → 스킵');
     return;
   }
 
-  const destinations: any[] = JSON.parse(fs.readFileSync(destPath, 'utf-8'));
-  const targets = isAll ? destinations : destinations.filter(d => !d.images || d.images.length === 0);
+  const { data, error } = await supabaseAdmin.from('destinations').select('*');
+  if (error) {
+    console.error('  ❌ 목록 조회 실패:', error.message);
+    return;
+  }
+
+  const targets: DestinationRow[] = isAll ? (data ?? []) : (data ?? []).filter((d: DestinationRow) => !d.images || d.images.length === 0);
 
   if (targets.length === 0) {
     console.log('  수집할 항목 없음 → 스킵');
@@ -129,30 +153,34 @@ async function fetchImages() {
     process.stdout.write(`  [${i + 1}/${targets.length}] ${dest.name} ...`);
     try {
       const images = await fetchImagesForDest(dest.name);
-      dest.images = images;
+      const { error: updateError } = await supabaseAdmin.from('destinations').update({ images }).eq('id', dest.id);
+      if (updateError) throw updateError;
       process.stdout.write(` ✓ (${images.length}장)\n`);
     } catch {
       process.stdout.write(` ✗ 실패\n`);
-      dest.images = [];
     }
     await new Promise(r => setTimeout(r, 300));
   }
 
-  fs.writeFileSync(destPath, JSON.stringify(destinations, null, 2), 'utf-8');
   console.log('  이미지 수집 완료');
 }
 
 // ─── Step 3. Fetch Blogs ─────────────────────────────────────
 async function fetchBlogs() {
-  console.log(`\n📝 [3/4] 블로그 수집 시작 ${isAll ? '(전체)' : '(신규만)'}`);
+  console.log(`\n📝 [3/3] 블로그 수집 시작 ${isAll ? '(전체)' : '(신규만)'}`);
 
   if (!CLIENT_ID || !CLIENT_SECRET) {
     console.error('  ❌ NAVER_CLIENT_ID 또는 NAVER_CLIENT_SECRET 없음 → 스킵');
     return;
   }
 
-  const destinations: any[] = JSON.parse(fs.readFileSync(destPath, 'utf-8'));
-  const targets = isAll ? destinations : destinations.filter(d => !d.blogs || d.blogs.length === 0);
+  const { data, error } = await supabaseAdmin.from('destinations').select('*');
+  if (error) {
+    console.error('  ❌ 목록 조회 실패:', error.message);
+    return;
+  }
+
+  const targets: DestinationRow[] = isAll ? (data ?? []) : (data ?? []).filter((d: DestinationRow) => !d.blogs || d.blogs.length === 0);
 
   if (targets.length === 0) {
     console.log('  수집할 항목 없음 → 스킵');
@@ -185,56 +213,24 @@ async function fetchBlogs() {
     process.stdout.write(`  [${i + 1}/${targets.length}] ${dest.name} ...`);
     try {
       const blogs = await fetchBlogsForDest(dest.name);
-      dest.blogs = blogs;
+      const { error: updateError } = await supabaseAdmin.from('destinations').update({ blogs }).eq('id', dest.id);
+      if (updateError) throw updateError;
       process.stdout.write(` ✓ (${blogs.length}개)\n`);
     } catch {
       process.stdout.write(` ✗ 실패\n`);
-      dest.blogs = [];
     }
     await new Promise(r => setTimeout(r, 300));
   }
 
-  fs.writeFileSync(destPath, JSON.stringify(destinations, null, 2), 'utf-8');
   console.log('  블로그 수집 완료');
-}
-
-// ─── Step 4. Generate Client ─────────────────────────────────
-function generateClient() {
-  console.log('\n⚙️  [4/4] destinations-client.ts 생성');
-
-  const data: any[] = JSON.parse(fs.readFileSync(destPath, 'utf-8'));
-  const lines = data.map((d: any) => {
-    const season = JSON.stringify(d.season ?? []);
-    const theme = JSON.stringify(d.theme ?? []);
-    return `  { name: '${d.name}', tag: '${d.tag}', emoji: '${d.emoji}', lat: ${d.lat}, lng: ${d.lng}, season: ${season}, theme: ${theme} },`;
-  });
-
-  const content = `export interface Destination {
-  name: string;
-  tag: string;
-  emoji: string;
-  lat: number;
-  lng: number;
-  season: string[];
-  theme: string[];
-}
-
-export const DESTINATIONS: Destination[] = [
-${lines.join('\n')}
-];
-`;
-
-  fs.writeFileSync(clientPath, content, 'utf-8');
-  console.log(`  ✅ destinations-client.ts 생성 완료 (${data.length}개)`);
 }
 
 // ─── Main ─────────────────────────────────────────────────────
 async function main() {
   console.log(`🚀 update-destinations 시작 ${isAll ? '(전체 업데이트)' : '(신규 항목만)'}`);
-  merge();
+  await merge();
   await fetchImages();
   await fetchBlogs();
-  generateClient();
   console.log('\n🎉 모든 작업 완료!');
 }
 
