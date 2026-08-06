@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { haversineKm, DAY_TRIP_MAX_KM } from './regions';
 
 export interface Destination {
   id: number;
@@ -46,7 +47,11 @@ export async function getRandomDestination(): Promise<Destination | null> {
 }
 
 // 필터 조건에 맞는 데이터 return
-export async function getFilteredDestinations(seasons: string[], themes: string[]): Promise<Destination[]> {
+export async function getFilteredDestinations(
+  seasons: string[],
+  themes: string[],
+  homeCoords?: { lat: number; lng: number } | null
+): Promise<Destination[]> {
   let query = supabase.from('destinations').select('*');
 
   if (seasons.length > 0) {
@@ -61,5 +66,11 @@ export async function getFilteredDestinations(seasons: string[], themes: string[
     throw error;
   }
 
-  return data ?? [];
+  let result = data ?? [];
+
+  if (homeCoords) {
+    result = result.filter(d => haversineKm(homeCoords.lat, homeCoords.lng, d.lat, d.lng) <= DAY_TRIP_MAX_KM);
+  }
+
+  return result;
 }

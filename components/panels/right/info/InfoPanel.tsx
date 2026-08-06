@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { REGIONS } from '@/lib/regions';
 
 const SEASONS = ['봄', '여름', '가을', '겨울'] as const;
 const THEMES = ['바다', '산', '역사', '자연', '맛집', '액티비티', '드라이브', '힐링', '도시'] as const;
@@ -26,25 +27,45 @@ const THEME_EMOJI: Record<string, string> = {
 export interface FilterState {
   seasons: string[];
   themes: string[];
+  dayTripOnly: boolean;
 }
 
 interface Props {
   onFilterChange: (filter: FilterState) => void;
+  homeRegion: string | null;
+  onHomeRegionChange: (code: string) => void;
 }
 
 type Tab = 'howto' | 'filter';
 
-export default function InfoPanel({ onFilterChange }: Props) {
+export default function InfoPanel({ onFilterChange, homeRegion, onHomeRegionChange }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('howto');
   const [selectedSeasons, setSelectedSeasons] = useState<string[]>([]);
   const [selectedThemes, setSelectedThemes] = useState<string[]>([]);
+  const [dayTripOnly, setDayTripOnly] = useState(false);
+  const [regionOpen, setRegionOpen] = useState(false);
+  const regionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!regionOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (regionRef.current && !regionRef.current.contains(e.target as Node)) {
+        setRegionOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [regionOpen]);
+
+  const selectedRegionName = REGIONS.find(r => r.code === homeRegion)?.name;
 
   const handleTabChange = (tab: Tab) => {
     setActiveTab(tab);
     if (tab === 'howto') {
       setSelectedSeasons([]);
       setSelectedThemes([]);
-      onFilterChange({ seasons: [], themes: [] });
+      setDayTripOnly(false);
+      onFilterChange({ seasons: [], themes: [], dayTripOnly: false });
     }
   };
 
@@ -54,7 +75,15 @@ export default function InfoPanel({ onFilterChange }: Props) {
     onFilterChange({
       seasons: key === 'seasons' ? next : selectedSeasons,
       themes: key === 'themes' ? next : selectedThemes,
+      dayTripOnly,
     });
+  };
+
+  const toggleDayTrip = () => {
+    if (!homeRegion) return;
+    const next = !dayTripOnly;
+    setDayTripOnly(next);
+    onFilterChange({ seasons: selectedSeasons, themes: selectedThemes, dayTripOnly: next });
   };
 
   const chipStyle = (selected: boolean) => ({
@@ -79,7 +108,6 @@ export default function InfoPanel({ onFilterChange }: Props) {
         background: '#ffffff',
         border: '1px solid var(--border)',
         borderRadius: '16px',
-        overflow: 'hidden',
         boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
       }}
     >
@@ -89,6 +117,8 @@ export default function InfoPanel({ onFilterChange }: Props) {
           padding: '24px 28px',
           background: 'linear-gradient(135deg, rgba(232,93,38,0.06) 0%, rgba(232,93,38,0.02) 100%)',
           borderBottom: '1px solid rgba(232,93,38,0.12)',
+          borderTopLeftRadius: '16px',
+          borderTopRightRadius: '16px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
@@ -198,8 +228,107 @@ export default function InfoPanel({ onFilterChange }: Props) {
               ))}
             </div>
 
+            {/* 출발지 + 당일치기 */}
+            <p
+              style={{
+                fontSize: '12px',
+                color: 'var(--text-muted)',
+                marginTop: '16px',
+                marginBottom: '8px',
+                marginLeft: '2px',
+              }}
+            >
+              출발지
+            </p>
+            <div ref={regionRef} style={{ position: 'relative', marginBottom: '10px' }}>
+              <button
+                type="button"
+                onClick={() => setRegionOpen(o => !o)}
+                style={{
+                  width: '100%',
+                  padding: '8px 10px',
+                  borderRadius: '8px',
+                  border: '1.5px solid var(--border)',
+                  fontSize: '13px',
+                  color: homeRegion ? 'var(--text-primary)' : 'var(--text-muted)',
+                  background: '#ffffff',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span>{selectedRegionName ?? '지역을 선택해주세요'}</span>
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: 'var(--text-muted)',
+                    transform: regionOpen ? 'rotate(180deg)' : 'none',
+                    transition: 'transform 0.15s ease',
+                  }}
+                >
+                  ▼
+                </span>
+              </button>
+
+              {regionOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 'calc(100% + 4px)',
+                    left: 0,
+                    right: 0,
+                    maxHeight: '168px',
+                    overflowY: 'auto',
+                    background: '#ffffff',
+                    border: '1.5px solid var(--border)',
+                    borderRadius: '10px',
+                    boxShadow: '0 10px 24px rgba(0,0,0,0.14)',
+                    zIndex: 30,
+                  }}
+                >
+                  {REGIONS.map(r => (
+                    <div
+                      key={r.code}
+                      onClick={() => {
+                        onHomeRegionChange(r.code);
+                        setRegionOpen(false);
+                      }}
+                      style={{
+                        padding: '8px 12px',
+                        fontSize: '13px',
+                        cursor: 'pointer',
+                        color: homeRegion === r.code ? 'var(--accent)' : 'var(--text-primary)',
+                        background: homeRegion === r.code ? 'rgba(232,93,38,0.08)' : 'transparent',
+                      }}
+                    >
+                      {r.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={toggleDayTrip}
+              disabled={!homeRegion}
+              style={{
+                ...chipStyle(dayTripOnly),
+                opacity: homeRegion ? 1 : 0.45,
+                cursor: homeRegion ? 'pointer' : 'not-allowed',
+              }}
+            >
+              <span>🚗</span> 당일치기 가능한 곳만
+            </button>
+            {!homeRegion && (
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '6px', marginLeft: '2px' }}>
+                출발지를 선택하면 당일치기 필터를 쓸 수 있어요
+              </p>
+            )}
+
             {/* 선택 현황 + 초기화 */}
-            {(selectedSeasons.length > 0 || selectedThemes.length > 0) && (
+            {(selectedSeasons.length > 0 || selectedThemes.length > 0 || dayTripOnly) && (
               <div
                 style={{ marginTop: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
@@ -208,7 +337,8 @@ export default function InfoPanel({ onFilterChange }: Props) {
                   onClick={() => {
                     setSelectedSeasons([]);
                     setSelectedThemes([]);
-                    onFilterChange({ seasons: [], themes: [] });
+                    setDayTripOnly(false);
+                    onFilterChange({ seasons: [], themes: [], dayTripOnly: false });
                   }}
                   style={{
                     fontSize: '12px',

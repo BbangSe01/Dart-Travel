@@ -20,6 +20,8 @@ interface Props {
   destinationsLoading: boolean;
   onFilterChange: (filter: any) => void;
   infoPanelKey: number;
+  homeRegion: string | null;
+  onHomeRegionChange: (code: string) => void;
 }
 
 export default function MobileLayout({
@@ -36,6 +38,8 @@ export default function MobileLayout({
   destinationsLoading,
   onFilterChange,
   infoPanelKey,
+  homeRegion,
+  onHomeRegionChange,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -86,7 +90,7 @@ export default function MobileLayout({
 
       {/* 지도 아래 InfoPanel */}
       <div style={{ marginTop: '16px' }}>
-        <InfoPanel key={infoPanelKey} onFilterChange={onFilterChange} />
+        <InfoPanel key={infoPanelKey} onFilterChange={onFilterChange} homeRegion={homeRegion} onHomeRegionChange={onHomeRegionChange} />
       </div>
 
       <AnimatePresence>

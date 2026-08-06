@@ -2,7 +2,9 @@
 import { useState, useCallback, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useHomeRegion } from '@/hooks/useHomeRegion';
 import type { Destination } from '@/lib/destinations';
+import { REGIONS } from '@/lib/regions';
 import RevealOverlay from '@/components/RevealOverlay';
 import MobileLayout from '@/components/layout/MobileLayout';
 import TabletLayout from '@/components/layout/TabletLayout';
@@ -16,10 +18,11 @@ function HomeContent() {
   const [destDetail, setDestDetail] = useState<any>(null);
   const [revealing, setRevealing] = useState(false);
   const [resetKey, setResetKey] = useState(0);
-  const [filter, setFilter] = useState<FilterState>({ seasons: [], themes: [] });
+  const [filter, setFilter] = useState<FilterState>({ seasons: [], themes: [], dayTripOnly: false });
   const [allDestinations, setAllDestinations] = useState<Destination[]>([]);
   const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([]);
   const [destinationsLoading, setDestinationsLoading] = useState(true);
+  const [homeRegion, setHomeRegion] = useHomeRegion();
   const isMobile = useMediaQuery('(max-width: 767px)');
   const isTablet = useMediaQuery('(max-width: 1100px)');
   const searchParams = useSearchParams();
@@ -41,12 +44,19 @@ function HomeContent() {
     const params = new URLSearchParams();
     filter.seasons.forEach(s => params.append('season', s));
     filter.themes.forEach(t => params.append('theme', t));
+    if (filter.dayTripOnly && homeRegion) {
+      const region = REGIONS.find(r => r.code === homeRegion);
+      if (region) {
+        params.set('homeLat', String(region.lat));
+        params.set('homeLng', String(region.lng));
+      }
+    }
 
     fetch(`/api/destination/list?${params.toString()}`)
       .then(res => res.json())
       .then(data => setFilteredDestinations(data))
       .catch(() => setFilteredDestinations([]));
-  }, [filter]);
+  }, [filter, homeRegion]);
 
   useEffect(() => {
     const dest = searchParams.get('dest');
@@ -89,7 +99,7 @@ function HomeContent() {
     setLoading(false);
     setDestDetail(null);
     setRevealing(false);
-    setFilter({ seasons: [], themes: [] });
+    setFilter({ seasons: [], themes: [], dayTripOnly: false });
     setResetKey(prev => prev + 1);
     window.history.replaceState({}, '', '/');
   }, []);
@@ -109,6 +119,8 @@ function HomeContent() {
     isRestoringFromUrl,
     onFilterChange: setFilter,
     infoPanelKey: resetKey,
+    homeRegion,
+    onHomeRegionChange: setHomeRegion,
   };
 
   return (

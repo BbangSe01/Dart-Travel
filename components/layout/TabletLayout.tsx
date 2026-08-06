@@ -20,6 +20,8 @@ interface Props {
   destinationsLoading: boolean;
   isRestoringFromUrl: boolean;
   onFilterChange: (filter: any) => void;
+  homeRegion: string | null;
+  onHomeRegionChange: (code: string) => void;
 }
 
 export default function TabletLayout({
@@ -36,6 +38,8 @@ export default function TabletLayout({
   destinationsLoading,
   isRestoringFromUrl,
   onFilterChange,
+  homeRegion,
+  onHomeRegionChange,
 }: Props) {
   const [copied, setCopied] = useState(false);
 
@@ -93,7 +97,7 @@ export default function TabletLayout({
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            <InfoPanel onFilterChange={onFilterChange} />
+            <InfoPanel onFilterChange={onFilterChange} homeRegion={homeRegion} onHomeRegionChange={onHomeRegionChange} />
           </motion.div>
         )}
         {landed && (
