@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 520" font-family="'Pretendard', 'Noto Sans KR', -apple-system, sans-serif">
+  <defs>
+    <marker id="arrowR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e85d26" />
+    </marker>
+    <marker id="arrowL" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7">
+      <path d="M10,0 L0,5 L10,10 Z" fill="#e85d26" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="520" rx="20" fill="#f5f3ef" stroke="#e5ded3" stroke-width="1" />
+
+  <text x="32" y="42" font-size="15" font-weight="700" fill="#111111">다트 여행 — 서버 아키텍처</text>
+  <text x="32" y="62" font-size="12" fill="#6b7280">Client ↔ Next.js API Routes ↔ Supabase(Postgres)</text>
+
+  <!-- Main flow: Client -> API -> Supabase -->
+  <g>
+    <rect x="30" y="90" width="250" height="130" rx="16" fill="#ffffff" stroke="#e5ded3" stroke-width="1.5" />
+    <text x="155" y="140" font-size="17" font-weight="700" fill="#111111" text-anchor="middle">Client</text>
+    <text x="155" y="164" font-size="12.5" fill="#4b5563" text-anchor="middle">Next.js Frontend (React)</text>
+    <text x="155" y="184" font-size="11.5" fill="#9ca3af" text-anchor="middle">지도 UI · 필터 · 다트 애니메이션</text>
+  </g>
+
+  <line x1="280" y1="155" x2="390" y2="155" stroke="#e85d26" stroke-width="2.5" marker-start="url(#arrowL)" marker-end="url(#arrowR)" />
+  <text x="335" y="140" font-size="11.5" fill="#c2410c" text-anchor="middle">HTTP fetch</text>
+  <text x="335" y="176" font-size="11.5" fill="#c2410c" text-anchor="middle">(JSON)</text>
+
+  <g>
+    <rect x="390" y="90" width="250" height="130" rx="16" fill="#ffffff" stroke="#e5ded3" stroke-width="1.5" />
+    <text x="515" y="135" font-size="17" font-weight="700" fill="#111111" text-anchor="middle">Next.js API Routes</text>
+    <text x="515" y="160" font-size="12.5" fill="#4b5563" text-anchor="middle">/api/destination</text>
+    <text x="515" y="178" font-size="12.5" fill="#4b5563" text-anchor="middle">/api/destination/list</text>
+    <text x="515" y="200" font-size="11" fill="#9ca3af" text-anchor="middle">anon key 클라이언트만 사용</text>
+  </g>
+
+  <line x1="640" y1="155" x2="750" y2="155" stroke="#e85d26" stroke-width="2.5" marker-start="url(#arrowL)" marker-end="url(#arrowR)" />
+  <text x="695" y="140" font-size="11.5" fill="#c2410c" text-anchor="middle">Supabase Client</text>
+  <text x="695" y="176" font-size="11.5" fill="#c2410c" text-anchor="middle">(anon key)</text>
+
+  <g>
+    <rect x="750" y="90" width="250" height="130" rx="16" fill="#ffffff" stroke="#e5ded3" stroke-width="1.5" />
+    <text x="875" y="135" font-size="17" font-weight="700" fill="#111111" text-anchor="middle">Supabase</text>
+    <text x="875" y="160" font-size="12.5" fill="#4b5563" text-anchor="middle">Postgres · destinations 테이블</text>
+    <text x="875" y="184" font-size="11.5" fill="#9ca3af" text-anchor="middle">여행지 조회 · 필터링 · 랜덤 추천</text>
+  </g>
+
+  <!-- Secondary flow: offline data pipeline -->
+  <text x="32" y="300" font-size="12.5" font-weight="700" fill="#6b7280">오프라인 데이터 파이프라인 (수동 실행)</text>
+
+  <g>
+    <rect x="150" y="320" width="220" height="64" rx="14" fill="#fdf6ee" stroke="#e5ded3" stroke-width="1.2" />
+    <text x="260" y="347" font-size="13" font-weight="600" fill="#111111" text-anchor="middle">한국관광공사</text>
+    <text x="260" y="366" font-size="12" fill="#6b7280" text-anchor="middle">Tour API (사진갤러리)</text>
+  </g>
+
+  <g>
+    <rect x="670" y="320" width="220" height="64" rx="14" fill="#fdf6ee" stroke="#e5ded3" stroke-width="1.2" />
+    <text x="780" y="347" font-size="13" font-weight="600" fill="#111111" text-anchor="middle">네이버</text>
+    <text x="780" y="366" font-size="12" fill="#6b7280" text-anchor="middle">블로그 검색 API</text>
+  </g>
+
+  <g>
+    <rect x="390" y="420" width="250" height="72" rx="14" fill="#ffffff" stroke="#e5ded3" stroke-width="1.5" stroke-dasharray="5 4" />
+    <text x="515" y="450" font-size="13.5" font-weight="700" fill="#111111" text-anchor="middle">scripts/update-destinations.ts</text>
+    <text x="515" y="470" font-size="11.5" fill="#9ca3af" text-anchor="middle">service_role 키 · 로컬에서 수동 실행</text>
+  </g>
+
+  <line x1="260" y1="384" x2="450" y2="420" stroke="#9ca3af" stroke-width="1.6" stroke-dasharray="4 4" />
+  <circle cx="450" cy="420" r="3" fill="#9ca3af" />
+  <line x1="780" y1="384" x2="600" y2="420" stroke="#9ca3af" stroke-width="1.6" stroke-dasharray="4 4" />
+  <circle cx="600" cy="420" r="3" fill="#9ca3af" />
+
+  <path d="M 640 456 C 700 456, 700 220, 750 176" fill="none" stroke="#9ca3af" stroke-width="1.6" stroke-dasharray="4 4" />
+  <circle cx="750" cy="176" r="3" fill="#9ca3af" />
+  <text x="705" y="300" font-size="11" fill="#9ca3af" text-anchor="middle">이미지·블로그 upsert</text>
+</svg>
