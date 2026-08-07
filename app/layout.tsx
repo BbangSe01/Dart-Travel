@@ -1,11 +1,16 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
+export const viewport: Viewport = {
+  themeColor: '#e85d26',
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dart-travel.vercel.app'),
   title: '다트 여행 | 랜덤 국내 여행지 추천',
   description:
-    '지도에 다트를 던져 오늘의 여행지를 결정하세요. 계절과 테마별 필터로 나만의 여행지를 찾아보세요. 한국관광공사 공식 사진과 함께 전국 국내 여행지를 랜덤으로 추천해드려요.',
+    '지도에 다트를 던져 오늘의 여행지를 결정하세요. 필터링을 통해 당신의 취향에 맞는 여행지를 찾을 확률을 높여보세요. 여행지 사진과 다양한 블로그 리뷰를 참고해 전국 국내 여행지를 랜덤으로 추천해드려요.',
   keywords: [
     '랜덤 여행',
     '국내 여행 추천',
@@ -28,7 +33,7 @@ export const metadata: Metadata = {
     url: 'https://dart-travel.vercel.app',
     siteName: '다트 여행',
     title: '다트 여행 | 랜덤 국내 여행지 추천',
-    description: '지도에 다트를 던져 오늘의 여행지를 결정하세요. 계절과 테마별 필터로 나만의 여행지를 찾아보세요.',
+    description: '지도에 다트를 던져 오늘의 여행지를 결정하세요.',
     images: [
       {
         url: 'https://dart-travel.vercel.app/opengraph-image',
@@ -41,10 +46,19 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '다트 여행 | 랜덤 국내 여행지 추천',
-    description: '지도에 다트를 던져 오늘의 여행지를 결정하세요. 계절과 테마별 필터로 나만의 여행지를 찾아보세요.',
+    description: '지도에 다트를 던져 오늘의 여행지를 결정하세요.',
     images: ['https://dart-travel.vercel.app/opengraph-image'],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
+  manifest: '/manifest.webmanifest',
   verification: { google: 'hkMTTYkbUeH_Y9R4OVOuj4-nOnL9uMk-UvGja_Z5K9s' },
   alternates: {
     canonical: 'https://dart-travel.vercel.app',

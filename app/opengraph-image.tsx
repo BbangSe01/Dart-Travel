@@ -48,7 +48,63 @@ export default function OGImage() {
         }}>
           {/* 이모지 + 타이틀 */}
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <span style={{ fontSize: "80px" }}>🎯</span>
+            <div
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "22px",
+                background: "linear-gradient(135deg, #f97316, #e85d26)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "65px",
+                  height: "65px",
+                  borderRadius: "50%",
+                  background: "#fdf6ee",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "47px",
+                    height: "47px",
+                    borderRadius: "50%",
+                    background: "#181818",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                      background: "#fdf6ee",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "13px",
+                        height: "13px",
+                        borderRadius: "50%",
+                        background: "#ef4444",
+                        display: "flex",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
             <span style={{
               fontSize: "80px",
               fontWeight: 700,

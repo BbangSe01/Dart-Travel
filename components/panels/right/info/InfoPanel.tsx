@@ -122,7 +122,6 @@ export default function InfoPanel({ onFilterChange, homeRegion, onHomeRegionChan
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-          <span style={{ fontSize: '20px' }}>🎯</span>
           <p
             style={{
               fontFamily: 'var(--font-mono)',

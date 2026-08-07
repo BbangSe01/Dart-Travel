@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
+import DartboardIcon from '@/components/DartboardIcon';
 import type { Destination } from '@/lib/destinations';
 
 interface Props {
@@ -67,8 +68,13 @@ export default function DesktopLayout({
       {/* Col 1: 헤더 + 지도 */}
       <div>
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-            <span style={{ fontSize: '35px', paddingBottom: '0.8rem' }}>🎯</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '6px' }}>
+            <DartboardIcon
+              size={34}
+              style={{
+                marginBottom: '0.15rem',
+              }}
+            />
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
@@ -110,7 +116,11 @@ export default function DesktopLayout({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <InfoPanel onFilterChange={onFilterChange} homeRegion={homeRegion} onHomeRegionChange={onHomeRegionChange} />
+              <InfoPanel
+                onFilterChange={onFilterChange}
+                homeRegion={homeRegion}
+                onHomeRegionChange={onHomeRegionChange}
+              />
             </motion.div>
           )}
           {landed && (

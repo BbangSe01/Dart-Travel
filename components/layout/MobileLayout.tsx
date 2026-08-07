@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
+import DartboardIcon from '@/components/DartboardIcon';
 import type { Destination } from '@/lib/destinations';
 
 interface Props {
@@ -57,11 +58,16 @@ export default function MobileLayout({
       {/* 헤더 */}
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '28px', paddingBottom: '0.6rem' }}>🎯</span>
+          <DartboardIcon
+            size={24}
+            style={{
+              marginBottom: '0.2rem',
+            }}
+          />
           <h1
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(24px, 6vw, 32px)',
+              fontSize: 'clamp(24px, 6vw, 24px)',
               fontWeight: 400,
               color: 'var(--text-primary)',
               margin: 0,
@@ -90,7 +96,12 @@ export default function MobileLayout({
 
       {/* 지도 아래 InfoPanel */}
       <div style={{ marginTop: '16px' }}>
-        <InfoPanel key={infoPanelKey} onFilterChange={onFilterChange} homeRegion={homeRegion} onHomeRegionChange={onHomeRegionChange} />
+        <InfoPanel
+          key={infoPanelKey}
+          onFilterChange={onFilterChange}
+          homeRegion={homeRegion}
+          onHomeRegionChange={onHomeRegionChange}
+        />
       </div>
 
       <AnimatePresence>

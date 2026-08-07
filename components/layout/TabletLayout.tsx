@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
+import DartboardIcon from '@/components/DartboardIcon';
 import type { Destination } from '@/lib/destinations';
 
 interface Props {
@@ -56,7 +57,12 @@ export default function TabletLayout({
     <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '32px 24px' }}>
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-          <span style={{ fontSize: '28px', paddingBottom: '0.6rem' }}>🎯</span>
+          <DartboardIcon
+            size={24}
+            style={{
+              marginBottom: '0.1rem',
+            }}
+          />
           <h1
             style={{
               fontFamily: 'var(--font-display)',
@@ -97,7 +103,11 @@ export default function TabletLayout({
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            <InfoPanel onFilterChange={onFilterChange} homeRegion={homeRegion} onHomeRegionChange={onHomeRegionChange} />
+            <InfoPanel
+              onFilterChange={onFilterChange}
+              homeRegion={homeRegion}
+              onHomeRegionChange={onHomeRegionChange}
+            />
           </motion.div>
         )}
         {landed && (
