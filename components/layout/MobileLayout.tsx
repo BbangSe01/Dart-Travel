@@ -1,10 +1,10 @@
 'use client';
-import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MapPanel from '@/components/panels/left/MapPanel';
 import ResultSet from '@/components/panels/right/result/ResultSet';
 import InfoPanel from '@/components/panels/right/info/InfoPanel';
 import DartboardIcon from '@/components/DartboardIcon';
+import { useShareResult } from '@/hooks/useShareResult';
 import type { Destination } from '@/lib/destinations';
 
 interface Props {
@@ -42,16 +42,7 @@ export default function MobileLayout({
   homeRegion,
   onHomeRegionChange,
 }: Props) {
-  const [copied, setCopied] = useState(false);
-
-  const handleShare = useCallback(() => {
-    const base = typeof window !== 'undefined' ? window.location.origin : 'https://dart-travel.vercel.app';
-    const url = `${base}?dest=${encodeURIComponent(landed!.name)}`;
-    navigator.clipboard.writeText(url).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  }, [landed]);
+  const { handleShare, copied } = useShareResult(landed);
 
   return (
     <div style={{ padding: '24px 16px' }}>
@@ -150,7 +141,7 @@ export default function MobileLayout({
                       transition: 'all 0.18s',
                     }}
                   >
-                    {copied ? '✓ 결과를 공유해보세요!' : '🔗 결과 URL 복사'}
+                    {copied ? '✓ 결과를 공유해보세요!' : '📤 결과 공유하기'}
                   </button>
                   <button
                     onClick={handleReset}
